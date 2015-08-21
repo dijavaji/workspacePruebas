@@ -1,0 +1,11 @@
+.pmd
+.jazzignore
+.settings
+.externalToolBuilders
+.metadata
+target
+bin
+jspm_packages
+node_modules
+dist
+${env.JBOSS_HOME}

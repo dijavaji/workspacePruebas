@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  	<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+	<div ng-app="" ng-init="quantity=3;cost=5;firstName='John'">
+	  <p>Name: <input type="text" ng-model="name"></p>
+	  <p ng-bind="name"></p>
+	  <p>Total in dollar: <span ng-bind="quantity * cost"></span> </p>
+	  <p>The name is <span ng-bind="firstName"></span></p>
+	  <p>My first expression: {{ 5 + 5 }}</p>
+	  
+	    <p>Nombre: <input type="text" ng-model="nombre"></p>
+  		<p>{{nombre}}</p>
+	  
+	   <a href="login.html">Login</a>
+	   <a href="repeatElements.html">repeat Element</a> 
+	   <a href="numberCurrency.html">number format</a>
+	   <a href="readWebService.html">web service</a>
+	   <a href="readWebService2.html">web service2</a>
+	   <a href="dataTable.html">table</a>
+	</div>
+</body>
+</html>

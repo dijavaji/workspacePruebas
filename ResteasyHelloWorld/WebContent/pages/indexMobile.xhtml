@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<!-- Include meta tag to ensure proper rendering and touch zooming -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!-- Include jQuery Mobile stylesheets -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+  <!-- Include the jQuery library -->
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <!-- Include the jQuery Mobile library -->
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	
+
+</h:head> 
+<body> 
+<div data-role="page" id="pageone">
+  <div data-role="header">
+    <h1>Welcome To My Homepage</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Welcome! If you click on the link below, it will take you to Page Two.</p>
+    <a href="#pagetwo">Go to Page Two</a>
+  </div>
+
+  <div data-role="footer">
+    <h1>Footer Text</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="pagetwo">
+  <div data-role="header">
+   <h1>Autenticacion de Usuario</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>This is Page Two. If you click on the link below, it will take you to Page One.</p>
+    <a href="#pageone">Go to Page One</a>
+  </div>
+  
+	<div data-role="content">
+		<form id="formulario" >
+		<label> Usuario </label>
+		<input type="text" id="nombredeusuario" name="nombredeusuario"/>
+		<label> Password </label>
+		<input type="password" id="clave" name="clave" />
+		 
+		<input type="submit" value="Login" id="botonLogin"/>
+		</form>
+	</div> 
+	<script>
+	$('#formulario').submit(function() {
+		// recolecta los valores que inserto el usuario
+		var datosUsuario = $("#nombredeusuario").val()
+		var datosPassword = $("#clave").val()
+		archivoValidacion = "http://revolucion.mobi/ejemplos/phonegap/envioFormulario/validacion_de_datos.php?jsoncallback=?"
+		$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
+		.done(function(respuestaServer) {
+		alert(respuestaServer.mensaje + "\nGenerado en: " + respuestaServer.hora + "\n" +respuestaServer.generador)
+		if(respuestaServer.validacion == "ok"){
+		/// si la validacion es correcta, muestra la pantalla "home"
+		$.mobile.changePage("#home")
+		}else{
+		/// ejecutar una conducta cuando la validacion falla
+		}
+		})
+		return false;
+		}) 
+	</script>
+
+  <div data-role="footer">
+    <h1>Footer Text</h1>
+  </div>
+</div> 
+	
+</body> 
+</html>

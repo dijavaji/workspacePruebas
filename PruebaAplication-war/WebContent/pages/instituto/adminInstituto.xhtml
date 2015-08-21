@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/masterLayout.xhtml"
+      xmlns:tech="http://java.sun.com/jsf/composite/components/instituto"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<ui:define name="windowTitle">
+		Instituto
+	</ui:define>
+	<ui:define name="headerMenu">
+	<!--  <te:menuNavigationComponent></te:menuNavigationComponent> -->
+	</ui:define>
+	
+	<ui:define name="contentHeader">
+	
+		
+	</ui:define>
+	
+	<ui:define name="content">
+		<p:panel id="basic" header="Institucion | Listar informacion">
+			<tech:dataTableInstituto ></tech:dataTableInstituto>
+			<f:facet name="actions">
+				<h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default" action="crearInstituto"><h:outputText styleClass="ui-icon ui-icon-star" /></h:commandLink>
+	            <h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"><h:outputText styleClass="ui-icon ui-icon-help"/></h:commandLink>
+	            
+			 </f:facet>
+		</p:panel>
+	</ui:define>
+
+</ui:composition>

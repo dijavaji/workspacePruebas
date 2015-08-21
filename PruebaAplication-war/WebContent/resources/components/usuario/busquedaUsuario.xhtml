@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	<composite:interface>
+		<composite:attribute name="busquedaUsuarioController" required="true" shortDescription="Controlador del componente de busqueda de usuarios" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+			
+		      <h:panelGroup layout="block" style="width:100%;">
+					
+					<rich:panel>
+						<f:facet name="header">
+							<h:outputText value="Criterios de b&#250;squeda" />
+						</f:facet>
+						<h:selectBooleanCheckbox id="chkShareUser" value="#{cc.attrs.busquedaUsuarioController.sharedUser}">
+							 <!-- <a4j:ajax event="click" render="pnlUserSearch pnlCriterioBusqueda" /> -->
+						</h:selectBooleanCheckbox>
+						
+						<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+						 	<p:selectOneRadio id="slcrShareType" value="#{cc.attrs.busquedaUsuarioController.sharedType}"  layout="grid" columns="3">
+	            				<f:selectItems value="#{cc.attrs.delegateShareDocument.sharedTypeLst}" var="c" itemLabel="#{city}" itemValue="#{city}"/>
+        					</p:selectOneRadio>
+						</h:panelGrid>
+						<!-- <h:selectOneRadio id="slcrShareUser" value="#" style="font-weight:bold">
+					        <f:selectItem id="item1" itemLabel="Usuarios" itemValue="1" />
+					        <f:selectItem id="item2" itemLabel="Areas de trabajo" itemValue="2" />
+					        <f:selectItem id="item3" itemLabel="Perfiles" itemValue="3" />
+					        <f:selectItems value="#{cc.attrs.delegateShareDocument.tiposAccesoEnumList}" />
+					        <a4j:ajax event="click" render="pnlUserSearch pnlCriterioBusqueda" />
+					    </h:selectOneRadio> -->
+						 
+						
+							<!-- busqueda por usuario -->
+							<h:panelGroup id="pnlUserSearch" rendered="#{cc.attrs.busquedaUsuarioController.sharedUser}">
+								<h:panelGrid columns="2" cellpadding="3" cellspacing="0">
+										<p:outputLabel value="Nombre" for="inpNombreUsuario"></p:outputLabel>
+										<p:inputText id="inpNombreUsuario" value="#{cc.attrs.busquedaUsuarioController.nombreUsuario}" ></p:inputText>								
+								</h:panelGrid>
+							</h:panelGroup>
+							
+							<!-- boton buscar -->
+						<h:panelGroup layout="block"  style="float:right">
+							<p:commandLink value="buscar" styleClass="buscarD" execute="@this pnlUserSearch"
+								actionListener="#{cc.attrs.delegateSharedDocument.loadUserShare}" render="pnlShareUsers pklShareUser" />
+						</h:panelGroup>						
+						
+						
+					</rich:panel>
+				</h:panelGroup>				
+		</div>
+</composite:implementation>
+</ui:composition>
