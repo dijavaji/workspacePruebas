@@ -9,3 +9,5 @@ jspm_packages
 node_modules
 dist
 ${env.JBOSS_HOME}
+/build
+/build
