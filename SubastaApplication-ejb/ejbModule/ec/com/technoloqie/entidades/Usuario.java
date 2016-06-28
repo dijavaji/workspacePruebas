@@ -197,4 +197,3 @@ public class Usuario implements Serializable {
         return "ec.edu.uce.entidades.Usuario[ id=" + id + " ]";
     }
     
-}
