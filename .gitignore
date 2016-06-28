@@ -3,8 +3,17 @@
 .settings
 .externalToolBuilders
 .metadata
+.mylyn
+.plugins
+.log
+.class
+.classpath
+.settings
+.org.eclipse.*
 target
 bin
+/bin
+/target
 jspm_packages
 node_modules
 dist
