@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+      <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+
+        <title><ui:insert name="windowTitle"/></title>
+        <link href="./recursos/imagenes/apple-touch-icon.png" rel="shortcut icon" type="image/x-icon" />
+        <link href="./recursos/imagenes/apple-touch-icon.png" rel="icon" type="image/x-icon" />
+    </h:head>
+    <h:body>
+        <!-- cabecera de la pagina -->
+        <div id="header-container">
+			<header class="wrapper clearfix">
+	            <h1 id="title">&copy; prueba </h1>
+<!-- 	            <h:form id="frmCabecera">
+		            <nav>
+		                <ul>
+		                    <li><h:commandLink action="#" value="Inscribete "/> </li>
+		                    <li><h:commandLink action="#" value="Mi Cuenta "/></li>
+		                    <li><h:commandLink action="#" value="Ayuda "/></li>
+		                </ul>
+		            </nav>
+	            </h:form> -->
+		    </header>
+        </div>
+        <!-- FIN cabecera de la pagina-->
+
+        <!-- contenido de la pagina -->
+        <div id="main-container">
+		<div id="main" class="wrapper clearfix">
+			
+			 <article>
+				  <header>
+	                 <h3>
+	                    <ui:insert name="contentHeader"/>
+	                </h3>
+	               </header>
+	                <section>
+	                        <h2>
+	                        
+	                        </h2>
+	                        <h:form>
+	                              <ui:insert name="content"/>
+	                        </h:form>
+	                        
+                    </section>
+
+                    <footer>
+                      
+                    </footer>
+			 </article>
+			
+			 <aside>
+             </aside>
+		</div> <!-- main -->
+        </div> <!-- fin contenido pagina-->
+
+
+        <!--declaracion pie de pagina -->
+        <div id="footer-container">
+            <footer class="wrapper">
+                <h:form>
+                    <div style="width:400px">Copyright 2014&#160;<a href="http://www.fing.uce.edu.ec/" target="_blank"> </a></div>
+                    <div style="float:right;width:250px;"><i>Powered By&#160;<a href="http://www.primefaces.org/" target="_blank">Primefaces</a></i></div>
+                </h:form>
+            </footer>
+        </div>
+        <!-- fin pie de pagina -->
+    </h:body>
+</html>
