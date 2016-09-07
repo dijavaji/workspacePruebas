@@ -11,3 +11,4 @@ dist
 ${env.JBOSS_HOME}
 /build
 /build
+/build

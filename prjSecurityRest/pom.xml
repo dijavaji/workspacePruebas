@@ -11,8 +11,8 @@
         <gin.version>2.1.2</gin.version>
         <guice.version>3.0</guice.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
-        <spring.security.version>3.2.3.RELEASE</spring.security.version>
-        <spring.version>3.2.8.RELEASE</spring.version>
+        <spring.security.version>3.2.9.RELEASE</spring.security.version>
+        <spring.version>3.2.15.RELEASE</spring.version>
 
         <!--Plugin versions-->
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
