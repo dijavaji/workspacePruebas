@@ -11,6 +11,8 @@ public class CalendarUser implements Serializable{
 	    private String lastName;
 	    private String email;
 	    private String password;
+	    
+	    private String login;
 
 	    /**
 	     * Gets the email address for this user. When authenticating against this data directly, this is also used as the

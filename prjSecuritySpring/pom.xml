@@ -88,12 +88,12 @@
       <version>1.6.4</version>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.6.4</version>
       <scope>runtime</scope>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
@@ -162,6 +162,18 @@
       <version>${spring.version}</version>
       <scope>compile</scope>
     </dependency>
+    
+    	<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
 	</dependencies>
   
   <build>
