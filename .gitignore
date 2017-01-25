@@ -18,3 +18,7 @@ jspm_packages
 node_modules
 dist
 ${env.JBOSS_HOME}
+.gitignore
+*/.class
+*/.settings
+*/.classpath

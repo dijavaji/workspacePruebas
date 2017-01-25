@@ -19,7 +19,8 @@ public class CronTriggerExample {
 		//Quartz 1.6.3
 	    	CronTrigger trigger = new CronTrigger();
 	    	trigger.setName("dummyTriggerName");
-	    	trigger.setCronExpression("0/5 * * * * ?");
+	    	//trigger.setCronExpression("0/5 * * * * ?");
+	    	trigger.setCronExpression("0 0/15 * 1/1 * ? *");
 	    	
 	    	
 	    	//schedule it
