@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	<composite:interface>
+		<composite:attribute name="controller" required="true" shortDescription="Controlador de la tabla" />
+		<composite:attribute name="label" required="false" shortDescription="parametro texto del label" />
+		<composite:attribute name="value" required="false" shortDescription="parametro texto del label" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+		        <h:panelGrid columns="3" cellpadding="5">
+		        		   	<h:outputLabel for="inptLcc" value="#{cc.attrs.label}" />
+        					<p:inputText id="inptLcc" value="#{cc.attrs.value}" required="true" />
+        					<p:message for="inptLcc" display="text"/>
+				</h:panelGrid>
+		</div>
+	</composite:implementation>
+</ui:composition>

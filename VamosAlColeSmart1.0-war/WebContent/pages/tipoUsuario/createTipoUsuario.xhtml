@@ -1,0 +1,34 @@
+<!--
+    Document   : pagina principal del menu del sistema
+    Created on : 07-09-2014
+    Author     : thc
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/masterTemplate.xhtml"
+      xmlns:te="http://java.sun.com/jsf/composite/components/tipoUsuario"> 
+
+	<ui:define name="windowTitle">
+		Creacion Tipo Usuario
+	</ui:define>
+	<ui:define name="headerMenu">
+	
+	</ui:define>
+	
+	<ui:define name="contentHeader">
+				
+	</ui:define>
+	
+	<ui:define name="content">
+		 <!-- <h:commandLink action="pages/institucion/adminInstitucion" value="institucion" /> -->
+		 <!-- <h:commandLink action="/principal" value="tipoUsuario" /> -->
+		 <p:panel id="pnlLogin" header="Tipo usuario | Informacion" style="margin-bottom:20px">
+		  <te:datosTipoUsuario ></te:datosTipoUsuario> 
+		  </p:panel>
+		
+	</ui:define>
+
+</ui:composition>
