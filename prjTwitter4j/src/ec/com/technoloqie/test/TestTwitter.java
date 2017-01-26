@@ -150,6 +150,71 @@ public class TestTwitter {
                 }
             }
         }
-	}     
+	}
+	
+	/**
+	 *	Busca tweets y guarda en archivos planos. 
+	 */
+	@Test
+	public void searchForPublicTwettsStored(){
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+	    cb.setDebugEnabled(true)
+	          .setOAuthConsumerKey("j2q4tqEaB5l5tPRW5X2H9flRZ")
+	          .setOAuthConsumerSecret("rlckxtUWZeqSLV1fbfB7ZenQWj6bC88dMwKj11cc8CY6OaHmYl")
+	          .setOAuthAccessToken("2491865817-9qngSxV3tPzJ3q4BUsjNgKpmnB4d5LXq4Uw2nrO")
+	          .setOAuthAccessTokenSecret("WnWfYFAqGZ8MzdgaaSYrT7hJ4zFpV8FxKtDbE1S54yIgM");
+	    TwitterFactory tf = new TwitterFactory(cb.build());
+	    Twitter twitter = tf.getInstance();
+	        try {
+	            Query query = new Query("@MashiRafael");
+	            QueryResult result;
+	            result = twitter.search(query);
+	            List<Status> tweets = result.getTweets();
+	            StringBuilder sb = new StringBuilder();
+	            for (Status tweet : tweets) {
+	            	//sb = new StringBuilder();
+	                sb.append(tweet.getCreatedAt());	//fecha creacion del tweet
+	                sb.append("|");
+	                sb.append(tweet.getUser().getScreenName());	//nombre del usuario
+	                sb.append("|");
+	                sb.append(tweet.getUser().getName());	//nombre del usuario completo
+	                sb.append("|");
+	                sb.append(tweet.getText());		//tweet texto
+	                sb.append("|");
+	                sb.append(tweet.getId());	//tweet id
+	                sb.append("|");
+	                sb.append(tweet.getSource());	//aplicacion q envio el tweet
+	                sb.append("|");
+	                sb.append(tweet.getUser().getFollowersCount());	//followers
+	                sb.append("|");
+	                sb.append(tweet.getUser().getFriendsCount());	//follows 
+	                sb.append("|");
+	                sb.append(tweet.getRetweetCount());		//retweets
+	                sb.append("|");
+	                sb.append(tweet.getFavoriteCount());	//favoritos
+	                sb.append("|");
+	                sb.append(tweet.getUser().isVerified());		//Whether this user has a verified badge.
+	                sb.append("|");
+	                sb.append(tweet.getUser().getCreatedAt());	//creado desde
+	                sb.append("|");
+	                sb.append(tweet.getGeoLocation());		//location
+	                sb.append("|");
+	                sb.append(tweet.getUser().getDescription());	//bio
+	                sb.append("|");
+	                sb.append(tweet.getUser().getProfileImageURL());	//imagen de perfil
+	                sb.append("|");
+	                sb.append(tweet.getGeoLocation());	
+	                sb.append("|");
+	                sb.append(tweet.getUser().getId());
+	            	System.out.println(sb.toString());
+	            }
+
+	            System.exit(0);
+	        } catch (TwitterException te) {
+	            te.printStackTrace();
+	            System.out.println("Failed to search tweets: " + te.getMessage());
+	            System.exit(-1);
+	        }
+	}
 
 }
