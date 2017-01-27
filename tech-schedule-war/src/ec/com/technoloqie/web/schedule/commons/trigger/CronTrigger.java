@@ -18,7 +18,7 @@ public class CronTrigger {
 		JobDetail job = JobBuilder.newJob(JobA.class).withIdentity("dummyJobName", "group1").build();
 
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("dummyTriggerName", "group1")
-				.withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?")).build();    
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/15 * 1/1 * ? *")).build();    
 
 		// schedule it
 		this.scheduler = new StdSchedulerFactory().getScheduler();
