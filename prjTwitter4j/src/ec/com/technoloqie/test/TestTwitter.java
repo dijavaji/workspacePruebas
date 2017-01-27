@@ -3,8 +3,12 @@ package ec.com.technoloqie.test;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -166,13 +170,24 @@ public class TestTwitter {
 	    TwitterFactory tf = new TwitterFactory(cb.build());
 	    Twitter twitter = tf.getInstance();
 	        try {
-	            Query query = new Query("@MashiRafael");
+	        	String candidato= "MashiRafael";
+	        	Date dNow = new Date( );
+	            SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd-hh:mm:ss");
+
+	            System.out.println("Current Date: " + ft.format(dNow));
+	            Query query = new Query("@"+candidato);
+	            query.setCount(100);
+	            //query.setLang("en");
+	            query.setSince("2017-01-20");
+	            query.setUntil("2017-01-27");
 	            QueryResult result;
 	            result = twitter.search(query);
 	            List<Status> tweets = result.getTweets();
 	            StringBuilder sb = new StringBuilder();
+	            PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/"+candidato+ft.format(dNow), "UTF-8");
 	            for (Status tweet : tweets) {
 	            	//sb = new StringBuilder();
+	            	sb.delete(0, sb.length());
 	                sb.append(tweet.getCreatedAt());	//fecha creacion del tweet
 	                sb.append("|");
 	                sb.append(tweet.getUser().getScreenName());	//nombre del usuario
@@ -197,7 +212,7 @@ public class TestTwitter {
 	                sb.append("|");
 	                sb.append(tweet.getUser().getCreatedAt());	//creado desde
 	                sb.append("|");
-	                sb.append(tweet.getGeoLocation());		//location
+	                sb.append(tweet.getUser().getLocation());		//location
 	                sb.append("|");
 	                sb.append(tweet.getUser().getDescription());	//bio
 	                sb.append("|");
@@ -207,14 +222,49 @@ public class TestTwitter {
 	                sb.append("|");
 	                sb.append(tweet.getUser().getId());
 	            	System.out.println(sb.toString());
+	            	writer.println(sb);
 	            }
-
+	            writer.close();	
 	            System.exit(0);
 	        } catch (TwitterException te) {
 	            te.printStackTrace();
 	            System.out.println("Failed to search tweets: " + te.getMessage());
 	            System.exit(-1);
+	        }catch (IOException e){
+	        	System.out.println("Error al escribir archivo: " + e.getMessage());
 	        }
+	}
+	
+	@Test
+	public void storePlain(){
+		File file = new File("/home/thc/Documents/Diego/AnalisisDatos/Hello1.txt");
+	      
+	      // creates the file
+	      try {
+			file.createNewFile();
+			// creates a FileWriter Object
+		      FileWriter writer = new FileWriter(file); 
+		      
+		      // Writes the content to the file
+		      writer.write("This is an example/n");
+		      writer.write("adfdafdfdafdafddasf");
+		      writer.flush();
+		      writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void storePlainPrint(){
+		try{
+		    PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/Hello1.txt", "UTF-8");
+		    writer.println("The first line");
+		    writer.println("The second line");
+		    writer.close();
+		} catch (IOException e) {
+		   // do something
+		}
 	}
 
 }
