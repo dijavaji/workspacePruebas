@@ -44,19 +44,20 @@ public class TweeterJob implements Job{
 	        	for (String candidato : candidatosCol) {
 	        		//String candidato= "MashiRafael";
 		        	Date dNow = new Date( );
-		            SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd-hh:mm:ss");
+		            SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd-hh:mm:ss");
 
 		            System.out.println("Current Date: " + ft.format(dNow));
 		            Query query = new Query("@"+candidato);
 		            query.setCount(100);
 		            //query.setLang("en");
+		            SimpleDateFormat ftU = new SimpleDateFormat ("yyyy-MM-dd");
 		            query.setSince("2017-01-20");
-		            query.setUntil("2017-01-27");
+		            //query.setUntil(ftU.format(dNow));
 		            QueryResult result;
 		            result = twitter.search(query);
 		            List<Status> tweets = result.getTweets();
 		            StringBuilder sb = new StringBuilder();
-		            PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/"+candidato+ft.format(dNow), "UTF-8");
+		            PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/"+candidato+ft.format(dNow)+".txt", "UTF-8");
 		            for (Status tweet : tweets) {
 		            	//sb = new StringBuilder();
 		            	sb.delete(0, sb.length());
@@ -98,7 +99,7 @@ public class TweeterJob implements Job{
 		            }
 		            writer.close();
 				}
-	            System.exit(0);
+	            //System.exit(0);
 	        } catch (TwitterException te) {
 	            te.printStackTrace();
 	            System.out.println("Failed to search tweets: " + te.getMessage());

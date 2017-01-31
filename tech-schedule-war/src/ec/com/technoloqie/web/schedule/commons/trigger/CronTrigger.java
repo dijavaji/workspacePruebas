@@ -9,17 +9,18 @@ import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
 import ec.com.technoloqie.web.schedule.commons.jobs.JobA;
+import ec.com.technoloqie.web.schedule.commons.jobs.TweeterJob;
 
 public class CronTrigger {
 	
 	private Scheduler scheduler;
 	
 	public void ejecutarCronTriggerExample() throws Exception{
-		JobDetail job = JobBuilder.newJob(JobA.class).withIdentity("dummyJobName", "group1").build();
+		JobDetail job = JobBuilder.newJob(TweeterJob.class).withIdentity("dummyJobName", "group1").build();
 
 		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("dummyTriggerName", "group1")
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/15 * 1/1 * ? *")).build();    
-
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/15 * 1/1 * ?")).build(); 
+		 
 		// schedule it
 		this.scheduler = new StdSchedulerFactory().getScheduler();
 		this.scheduler.start();

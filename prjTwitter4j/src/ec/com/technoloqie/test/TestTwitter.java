@@ -1,13 +1,17 @@
 package ec.com.technoloqie.test;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -266,5 +270,72 @@ public class TestTwitter {
 		   // do something
 		}
 	}
+	
+	@SuppressWarnings("resource")
+	@Test
+	public void readPlainFiles(){
+		try{
+			final File folder = new File("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais");
+			Collection <String> filesNamesCol =listFilesForFolder(folder);
+			
+			PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/completoPlano.txt", "UTF-8");
+			String line;
+			for (String name : filesNamesCol) {
+				BufferedReader br = new BufferedReader(new FileReader("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/" + name));
+			    line = br.readLine();
+				while(line != null){
+					writer.println(line);
+					line = br.readLine();
+				}
+			}
+		    writer.close();
+		}catch(IOException e){
+			System.out.println("error");
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection <String> listFilesForFolder(final File folder) {
+		@SuppressWarnings("rawtypes")
+		Collection nameFilescol = new ArrayList<String>();
+	    for (final File fileEntry : folder.listFiles()) {
+	        /*if (fileEntry.isDirectory()) {
+	            listFilesForFolder(fileEntry);
+	        } else {
+	            System.out.println(fileEntry.getName());
+	        }*/
+	        if (fileEntry.isFile()) {
+	            System.out.println("File " + fileEntry.getName());
+	            nameFilescol.add(fileEntry.getName());
+	          } else if (fileEntry.isDirectory()) {
+	            System.out.println("Directory " + fileEntry.getName());
+	          }
+	    }
+	    return nameFilescol;
+	}
+
+	@Test
+	public void read() throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/apguayas2017.01.29-07:30:17"));
+		try {
+		    StringBuilder sb = new StringBuilder();
+		    String line = br.readLine();
+
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(System.lineSeparator());
+		        line = br.readLine();
+		    }
+		    String everything = sb.toString();
+		}catch(Exception e){
+			
+		}
+		 finally {
+		    br.close();
+		}
+	}
+
+
 
 }
