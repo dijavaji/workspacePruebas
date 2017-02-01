@@ -1,4 +1,4 @@
-package ec.com.technoloqie.ejb.sentiment.analysis.entities;
+package ec.com.technoloqie.ejb.sentiment.analysis.commons.entities;
 
 import java.util.Date;
 

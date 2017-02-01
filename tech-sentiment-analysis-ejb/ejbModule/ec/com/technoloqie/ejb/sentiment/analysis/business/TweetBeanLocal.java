@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import javax.ejb.Local;
 
-import ec.com.technoloqie.ejb.sentiment.analysis.entities.TweetEntity;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
 
 @Local
 public interface TweetBeanLocal {

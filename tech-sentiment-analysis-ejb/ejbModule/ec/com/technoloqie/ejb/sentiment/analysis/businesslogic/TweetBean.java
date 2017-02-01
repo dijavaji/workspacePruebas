@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import ec.com.technoloqie.ejb.sentiment.analysis.business.TweetBeanLocal;
-import ec.com.technoloqie.ejb.sentiment.analysis.entities.TweetEntity;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
 
 /**
  * Session Bean implementation class TweetBean
