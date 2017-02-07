@@ -4,13 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="SASTDATOTWITTER")
 public class TweetEntity {
 	
-	@Column(name="IDDATOTWITTER",nullable=false)
+	@Id
+    @GeneratedValue
 	private Integer id;
 	
 	@Column(name="FECHA",nullable=false)
