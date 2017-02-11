@@ -1,4 +1,4 @@
-package ec.com.technoloqie.ejb.sentiment.analysis.businesslogic;
+package ec.com.technoloqie.ejb.sentiment.analysis.persistence.businesslogic;
 
 import java.util.Collection;
 
@@ -10,8 +10,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import ec.com.technoloqie.ejb.sentiment.analysis.business.TweetBeanLocal;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
+import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetBeanLocal;
 
 /**
  * Session Bean implementation class TweetBean

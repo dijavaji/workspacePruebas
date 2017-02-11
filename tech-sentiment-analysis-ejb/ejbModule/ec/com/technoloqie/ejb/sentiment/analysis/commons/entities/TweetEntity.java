@@ -13,7 +13,8 @@ import javax.persistence.Table;
 public class TweetEntity {
 	
 	@Id
-    @GeneratedValue
+    //@GeneratedValue
+	@Column(name="IDDATOTWITTER",nullable=false)
 	private Integer id;
 	
 	@Column(name="FECHA",nullable=false)
@@ -28,7 +29,7 @@ public class TweetEntity {
 	@Column(name="TEXTOTWEET")
 	private String tweet;
 	
-	@Column(name="IDDATOTWITTER")
+	@Column(name="TWEETID")
 	private Long idTweet;
 	
 	@Column(name="APLICACION")
@@ -44,7 +45,7 @@ public class TweetEntity {
 	private Integer favorite;
 	
 	@Column(name="VERIFICAUSUARIO")
-	private String verified;
+	private char verified;
 	
 	@Column(name="USUARIODESDE")
 	private Date createdAt;
@@ -125,10 +126,10 @@ public class TweetEntity {
 	public void setFavorite(Integer favorite) {
 		this.favorite = favorite;
 	}
-	public String getVerified() {
+	public char getVerified() {
 		return verified;
 	}
-	public void setVerified(String verified) {
+	public void setVerified(char verified) {
 		this.verified = verified;
 	}
 	public Date getCreatedAt() {

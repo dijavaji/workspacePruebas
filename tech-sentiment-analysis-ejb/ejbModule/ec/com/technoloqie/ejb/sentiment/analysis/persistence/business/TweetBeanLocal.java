@@ -1,4 +1,4 @@
-package ec.com.technoloqie.ejb.sentiment.analysis.business;
+package ec.com.technoloqie.ejb.sentiment.analysis.persistence.business;
 
 import java.util.Collection;
 
