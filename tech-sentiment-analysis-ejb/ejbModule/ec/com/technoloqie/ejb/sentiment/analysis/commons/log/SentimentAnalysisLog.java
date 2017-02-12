@@ -5,9 +5,10 @@ import org.apache.log4j.Logger;
 
 public final class SentimentAnalysisLog {
 	
-	final static Logger logger = Logger.getLogger(SentimentAnalysisLog.class);
+	static final Logger logger = Logger.getLogger(SentimentAnalysisLog.class);
+	private static final SentimentAnalysisLog INSTANCIA = new SentimentAnalysisLog();
 	
-	public void info(String parameter){
+	public static void info(String parameter){
 		logger.info(parameter);
 	}
 	
@@ -19,12 +20,20 @@ public final class SentimentAnalysisLog {
 		logger.warn("This is warn : " + parameter);
 		}
 	
-	public void error(String parameter){
+	public static void error(String parameter){
 		logger.error(parameter);
 	}
 	
 	public void fatal(String parameter){
 		logger.fatal("This is fatal : " + parameter);
+	}
+	
+	public static void getLog(){
+		
+	}
+
+	public static void error(String string, Exception e) {
+		error(string + e.getMessage());
 	}
 	
 }
