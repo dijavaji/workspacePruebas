@@ -7,7 +7,7 @@ import javax.ejb.Local;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
 
 @Local
-public interface TweetBeanLocal {
+public interface TweetEjbLocal {
 	//public void crearUsuario(String nombre, String direccion, String email);
     public void createTweet(TweetEntity tweet);
     public TweetEntity findTweetId(Integer codigo);

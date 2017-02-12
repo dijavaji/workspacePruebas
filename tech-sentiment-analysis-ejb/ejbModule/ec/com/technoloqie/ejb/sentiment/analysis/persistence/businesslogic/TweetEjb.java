@@ -11,14 +11,14 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
-import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetBeanLocal;
+import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetEjbLocal;
 
 /**
  * Session Bean implementation class TweetBean
  */
 @Stateless
 @LocalBean
-public class TweetBean implements TweetBeanLocal {
+public class TweetEjb implements TweetEjbLocal {
 	
 	@PersistenceContext(unitName = "tech-sentiment-analysis-ejb")
     private EntityManager em;
@@ -64,5 +64,7 @@ public class TweetBean implements TweetBeanLocal {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }
