@@ -95,18 +95,17 @@ public class TwitterJob implements Job{
 		                sb.append(tweet.getGeoLocation());	
 		                sb.append("|");
 		                sb.append(tweet.getUser().getId());
-		            	System.out.println(sb.toString());
+		                SentimentAnalysisLog.info(sb.toString());
 		            	writer.println(sb);
 		            }
 		            writer.close();
 				}
 	            //System.exit(0);
 	        } catch (TwitterException te) {
-	            te.printStackTrace();
-	            System.out.println("Failed to search tweets: " + te.getMessage());
-	            System.exit(-1);
+	            SentimentAnalysisLog.info("Failed to search tweets: " + te.getMessage());
+	            //System.exit(-1);
 	        }catch (IOException e){
-	        	System.out.println("Error al escribir archivo: " + e.getMessage());
+	        	SentimentAnalysisLog.info("Error al escribir archivo: " + e.getMessage());
 	        }
 	}
 

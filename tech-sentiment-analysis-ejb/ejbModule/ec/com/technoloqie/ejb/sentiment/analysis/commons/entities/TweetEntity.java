@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,8 +14,8 @@ import javax.persistence.Table;
 public class TweetEntity {
 	
 	@Id
-    //@GeneratedValue
-	@Column(name="IDDATOTWITTER",nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@Column(name="IDDATOTWITTER",nullable=false, unique=true)
 	private Integer id;
 	
 	@Column(name="FECHA",nullable=false)
@@ -38,8 +39,11 @@ public class TweetEntity {
 	@Column(name="FOLLOWERS")
 	private Integer followers;
 	
-	@Column(name="FOLLOWRETWEET")
-	private Integer followretweet;
+	@Column(name="FOLLOW")
+	private Integer follow;
+	
+	@Column(name="RETWEET")
+	private Integer retweet;
 	
 	@Column(name="FAVORITO")
 	private Integer favorite;
@@ -54,10 +58,10 @@ public class TweetEntity {
 	private String location;
 	
 	@Column(name="BIODESCRIPCION")
-	private String description;
+	private String bioDescription;
 	
 	@Column(name="IMAGENPERFILURL")
-	private String prfileImageUrl;
+	private String profileImageUrl;
 	
 	@Column(name="GEOLOCACION")
 	private String geoLocation;
@@ -67,7 +71,7 @@ public class TweetEntity {
 	
 	//getters and setters
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
@@ -114,12 +118,6 @@ public class TweetEntity {
 	public void setFollowers(Integer followers) {
 		this.followers = followers;
 	}
-	public Integer getFollowretweet() {
-		return followretweet;
-	}
-	public void setFollowretweet(Integer followretweet) {
-		this.followretweet = followretweet;
-	}
 	public Integer getFavorite() {
 		return favorite;
 	}
@@ -144,17 +142,17 @@ public class TweetEntity {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getDescription() {
-		return description;
+	public String getBioDescription() {
+		return bioDescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBioDescription(String bioDescription) {
+		this.bioDescription = bioDescription;
 	}
-	public String getPrfileImageUrl() {
-		return prfileImageUrl;
+	public String getProfileImageUrl() {
+		return profileImageUrl;
 	}
-	public void setPrfileImageUrl(String prfileImageUrl) {
-		this.prfileImageUrl = prfileImageUrl;
+	public void setProfileImageUrl(String profileImageUrl) {
+		this.profileImageUrl = profileImageUrl;
 	}
 	public String getGeoLocation() {
 		return geoLocation;
@@ -167,5 +165,17 @@ public class TweetEntity {
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public Integer getFollow() {
+		return follow;
+	}
+	public void setFollow(Integer follow) {
+		this.follow = follow;
+	}
+	public Integer getRetweet() {
+		return retweet;
+	}
+	public void setRetweet(Integer retweet) {
+		this.retweet = retweet;
 	}
 }

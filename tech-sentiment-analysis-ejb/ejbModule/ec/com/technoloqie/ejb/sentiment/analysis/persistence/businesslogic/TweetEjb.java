@@ -10,7 +10,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.exception.SentimentAnalysisException;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.log.SentimentAnalysisLog;
 import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetEjbLocal;
 
 /**
@@ -60,11 +66,24 @@ public class TweetEjb implements TweetEjbLocal {
 	}
 
 	@Override
-	public Collection<TweetEntity> findTweets() {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<TweetEntity> findTweets() throws SentimentAnalysisException{
+		Collection <TweetEntity> tweets;
+		Session session = (Session)em.getDelegate();	//obtener el objeto Session con el que acceder a la API de hibernate.
+		Transaction tx = null;
+		try{
+		 	tx = session.beginTransaction();
+			Criteria cr = session.createCriteria(TweetEntity.class);
+			tweets = cr.list();
+			tx.commit();
+		}catch(Exception e){
+			if (tx!=null) tx.rollback();
+			SentimentAnalysisLog.error("Error al buscar los tweet", e);
+			throw new SentimentAnalysisException("Error al buscar los tweet", e);
+			
+		}finally{
+			session.close();
+		}
+		return tweets;
 	}
-	
-	
 
 }
