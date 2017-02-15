@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -88,7 +89,7 @@ public class TestTweetHibernateJPA {
 	@Test
 	public void readPlainFiles(){
 		try{
-			final File folder = new File("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais");
+			final File folder = new File("D:\\Mis Documentos\\Diego\\AnalisisDatos\\alianzaPais");
 			Collection <String> filesNamesCol = listFilesForFolder(folder);
 			
 			//PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/completoPlano.txt", "UTF-8");
@@ -97,7 +98,7 @@ public class TestTweetHibernateJPA {
 			SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
 			Date date = null;
 			for (String name : filesNamesCol) {
-				BufferedReader br = new BufferedReader(new FileReader("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/" + name));
+				BufferedReader br = new BufferedReader(new FileReader("D:\\Mis Documentos\\Diego\\AnalisisDatos\\alianzaPais\\" + name));
 			    line = br.readLine();
 				while(line != null){
 					//writer.println(line);
@@ -106,36 +107,75 @@ public class TestTweetHibernateJPA {
 					//while (st.hasMoreTokens()) {  
 				        //SentimentAnalysisLog.error(st.nextToken());
 				        try {
-				        	if(st.countTokens() == 17){
+				        	if(st.countTokens() <= 17){
 				        		if(st.hasMoreTokens()){
 					        		date = formatter.parse(st.nextToken());
 						            System.out.println(date);
 						            //System.out.println(formatter.format(date));
 						            twitt.setDateTweet(date);
-					        	}	
-					            twitt.setScreenName(st.nextToken());
-					            twitt.setName(st.nextToken());
-					            twitt.setTweet(st.nextToken());
-					            twitt.setIdTweet(Long.parseLong(st.nextToken()));
-					            twitt.setAplication(st.nextToken());
-					            twitt.setFollowers(Integer.parseInt(st.nextToken()));
-					            twitt.setFollow(Integer.parseInt(st.nextToken()));
-					            twitt.setRetweet(Integer.parseInt(st.nextToken()));
-					            twitt.setFavorite(Integer.parseInt(st.nextToken()));
-					            char verifica = st.nextToken().charAt(0);
-					            twitt.setVerified(verifica);
-					            date = formatter.parse(st.nextToken());
-					            twitt.setCreatedAt(date);
-					            twitt.setLocation(st.nextToken());
-					            twitt.setBioDescription(st.nextToken());
-					            twitt.setProfileImageUrl(st.nextToken());
-					            twitt.setGeoLocation(st.nextToken());
-					            twitt.setUserId(Long.parseLong(st.nextToken()));
-
+					        	}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setScreenName(st.nextToken());
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setName(st.nextToken());
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setTweet(st.nextToken());
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setIdTweet(Long.parseLong(st.nextToken()));
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setAplication(st.nextToken());
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setFollowers(Integer.parseInt(st.nextToken()));
+				        		}	
+				        		if(st.hasMoreTokens()){
+				        			twitt.setFollow(Integer.parseInt(st.nextToken()));
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setRetweet(Integer.parseInt(st.nextToken()));
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setFavorite(Integer.parseInt(st.nextToken()));
+				        		}
+				        		
+				        		if(st.hasMoreTokens()){
+				        			if(StringUtils.equals("false",st.nextToken())){
+						            	char verifica = '0';
+						            	twitt.setVerified(verifica);
+						            }else{
+						            	char verifica = '1';
+						            	twitt.setVerified(verifica);
+						            }
+				        		}
+				        		//User Since
+				        		if(st.hasMoreTokens()){
+				        			//date = formatter.parse(st.nextToken());
+				        			twitt.setCreatedAt(date);
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setLocation(st.nextToken());
+				        		}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setBioDescription(st.nextToken());	
+					        	}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setProfileImageUrl(st.nextToken());
+					        	}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setGeoLocation(st.nextToken());
+					        	}
+				        		if(st.hasMoreTokens()){
+				        			twitt.setUserId(Long.parseLong(st.nextToken()));
+					        	}
 				        	}
 				        	
 				        } catch (ParseException e) {
-				            e.printStackTrace();
+				        	SentimentAnalysisLog.error("Error al transformar una fecha. ", e);
+				           throw new SentimentAnalysisException("Error al transformar una fecha.",e);
 				        }
 				    // }  
 					line = br.readLine();
@@ -143,7 +183,8 @@ public class TestTweetHibernateJPA {
 			}
 		    //writer.close();
 		}catch(IOException e){
-			System.out.println("error");
+			SentimentAnalysisLog.error("Error al leer los archivos. ");
+			throw new SentimentAnalysisException("Error al leer los archivos. ",e);
 		}
 		
 	}
@@ -154,10 +195,10 @@ public class TestTweetHibernateJPA {
 		Collection nameFilescol = new ArrayList<String>();
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isFile()) {
-	            System.out.println("File " + fileEntry.getName());
+	        	SentimentAnalysisLog.info("File " + fileEntry.getName());
 	            nameFilescol.add(fileEntry.getName());
 	          } else if (fileEntry.isDirectory()) {
-	            System.out.println("Directory " + fileEntry.getName());
+	        	  SentimentAnalysisLog.info("Directory " + fileEntry.getName());
 	          }
 	    }
 	    return nameFilescol;
