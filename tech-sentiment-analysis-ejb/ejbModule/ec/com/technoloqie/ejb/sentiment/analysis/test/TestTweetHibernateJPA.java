@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import javax.persistence.EntityManager;
@@ -46,7 +47,7 @@ public class TestTweetHibernateJPA {
 			Date dateTweet = new Date( );
             SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd-hh:mm:ss");
 			tweet.setDateTweet(dateTweet);
-			// Crear una transacción e intertar objetos
+			// Crear una transaccion e intertar objetos
 			entityManager.getTransaction().begin();
 			entityManager.persist(tweet);
 			entityManager.flush();
@@ -95,10 +96,13 @@ public class TestTweetHibernateJPA {
 			//PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/completoPlano.txt", "UTF-8");
 			  
 			String line = null;
-			SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.ENGLISH);
 			Date date = null;
+			Collection <TweetEntity> tweetscol = new ArrayList<TweetEntity>();
+			Boolean guarda = Boolean.TRUE;
 			for (String name : filesNamesCol) {
 				BufferedReader br = new BufferedReader(new FileReader("D:\\Mis Documentos\\Diego\\AnalisisDatos\\alianzaPais\\" + name));
+				tweetscol.clear();
 			    line = br.readLine();
 				while(line != null){
 					//writer.println(line);
@@ -153,7 +157,7 @@ public class TestTweetHibernateJPA {
 				        		}
 				        		//User Since
 				        		if(st.hasMoreTokens()){
-				        			//date = formatter.parse(st.nextToken());
+				        			date = formatter.parse(st.nextToken());
 				        			twitt.setCreatedAt(date);
 				        		}
 				        		if(st.hasMoreTokens()){
@@ -175,11 +179,22 @@ public class TestTweetHibernateJPA {
 				        	
 				        } catch (ParseException e) {
 				        	SentimentAnalysisLog.error("Error al transformar una fecha. ", e);
-				           throw new SentimentAnalysisException("Error al transformar una fecha.",e);
+				        	//throw new SentimentAnalysisException("Error al transformar una fecha.",e);
+				        	guarda = Boolean.FALSE;
+				        }catch(NumberFormatException e){
+				        	SentimentAnalysisLog.error("Error al transformar un numero. ", e);
+				        	//throw new SentimentAnalysisException("Error al transformar una fecha.",e);
+				        	guarda = Boolean.FALSE;
 				        }
-				    // }  
+				        
+				    // }
+				    if(guarda){
+				    	tweetscol.add(twitt);
+				    }    
 					line = br.readLine();
+					guarda = Boolean.TRUE;
 				}
+				insertTweets(tweetscol);
 			}
 		    //writer.close();
 		}catch(IOException e){
@@ -189,6 +204,13 @@ public class TestTweetHibernateJPA {
 		
 	}
 	
+	private void insertTweets(Collection<TweetEntity> tweetscol) {
+		
+		for (TweetEntity tweetEntity : tweetscol) {
+			saveTweet(tweetEntity);
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public Collection <String> listFilesForFolder(final File folder) {
 		@SuppressWarnings("rawtypes")
@@ -202,6 +224,28 @@ public class TestTweetHibernateJPA {
 	          }
 	    }
 	    return nameFilescol;
+	}
+	
+	public void saveTweet(TweetEntity twitt){
+		// Obtener la factoria de sesiones
+		entityManagerFactory = Persistence.createEntityManagerFactory("mysql-localhost");
+		entityManager = entityManagerFactory.createEntityManager();
+		
+		try{
+			twitt.setIdTweet((long)1234567 );
+			// Crear una transaccion e intertar objetos
+			entityManager.getTransaction().begin();
+			entityManager.persist(twitt);
+			entityManager.flush();
+			entityManager.getTransaction().commit();
+		}catch(Exception e){
+			entityManager.getTransaction().rollback();
+			throw new SentimentAnalysisException("Error al crear un tweet", e);
+			
+		}finally{
+			//entityManager.close();
+			//entityManagerFactory.close();
+		}
 	}
 	
 }
