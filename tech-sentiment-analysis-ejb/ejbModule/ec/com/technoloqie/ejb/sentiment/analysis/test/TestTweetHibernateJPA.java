@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import javax.persistence.EntityManager;
@@ -61,6 +62,7 @@ public class TestTweetHibernateJPA {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void listCandidato(){
 		// Obtener la factoría de sesiones
@@ -71,7 +73,7 @@ public class TestTweetHibernateJPA {
 		try{
 		 	tx = session.beginTransaction();
 			Criteria cr = session.createCriteria(TweetEntity.class);
-			Collection <TweetEntity> results = cr.list();
+			Collection <TweetEntity> results = (Collection <TweetEntity>)cr.list();
 			for (TweetEntity object : results) {
 				SentimentAnalysisLog.info("tweet: " + object.getBioDescription());
 			}
@@ -95,7 +97,7 @@ public class TestTweetHibernateJPA {
 			//PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/completoPlano.txt", "UTF-8");
 			  
 			String line = null;
-			SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy", Locale.ENGLISH);
 			Date date = null;
 			for (String name : filesNamesCol) {
 				BufferedReader br = new BufferedReader(new FileReader("D:\\Mis Documentos\\Diego\\AnalisisDatos\\alianzaPais\\" + name));
