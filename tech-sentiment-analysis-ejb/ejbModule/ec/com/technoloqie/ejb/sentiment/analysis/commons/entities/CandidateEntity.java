@@ -3,24 +3,19 @@ package ec.com.technoloqie.ejb.sentiment.analysis.commons.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.id.CandidateEntityId;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="SASTCANDIDATO")
 public class CandidateEntity implements Serializable{
 	
-	@Id
-    //@GeneratedValue
-	@Column(name="IDCANDIDATO",nullable=false)
-	private Integer id;
-	
-	@Id
-    //@GeneratedValue
-	@Column(name="IDORGPOL",nullable=false)
-	private Integer idOrganization;
+	@EmbeddedId
+	CandidateEntityId id = new CandidateEntityId();
 	
 	@Column(name="CEDULA")
 	private String cedula;
@@ -48,22 +43,6 @@ public class CandidateEntity implements Serializable{
 	
 	@Column(name="TWITTER")
 	private String twitter;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getIdOrganization() {
-		return idOrganization;
-	}
-
-	public void setIdOrganization(Integer idOrganization) {
-		this.idOrganization = idOrganization;
-	}
 
 	public String getCedula() {
 		return cedula;
@@ -135,6 +114,14 @@ public class CandidateEntity implements Serializable{
 
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
+	}
+
+	public CandidateEntityId getId() {
+		return id;
+	}
+
+	public void setId(CandidateEntityId id) {
+		this.id = id;
 	}
 	
 }
