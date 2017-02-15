@@ -33,7 +33,7 @@ public class TestTweetHibernateJPA {
 	private static EntityManager entityManager;
 	private static GenericDAO dao;
 	//private static GenericSearchDAO sdao;
-	//@Test
+	@Test
 	public void saveTweet(){
 		// Obtener la factoría de sesiones
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-localhost");
