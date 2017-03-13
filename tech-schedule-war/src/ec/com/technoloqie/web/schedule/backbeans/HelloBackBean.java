@@ -23,8 +23,8 @@ public class HelloBackBean implements Serializable {
 	@PostConstruct
 	public void initilize(){
 		try {
-			example = new CronTrigger();
-			example.ejecutarCronTriggerExample();
+			//example = new CronTrigger();
+			//example.ejecutarCronTriggerExample();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
