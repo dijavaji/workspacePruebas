@@ -33,7 +33,7 @@ public class TestTweetHibernateJPA {
 	private static EntityManager entityManager;
 	private static GenericDAO dao;
 	//private static GenericSearchDAO sdao;
-	//@Test
+	@Test
 	public void saveTweet(){
 		// Obtener la factoría de sesiones
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-localhost");
@@ -42,7 +42,7 @@ public class TestTweetHibernateJPA {
 		try{
 			TweetEntity tweet = new TweetEntity();
 			//tweet.setId(2);
-			tweet.setIdTweet((long)1234567 );
+			//tweet.setIdTweet((long)1234567 );
 			tweet.setBioDescription("descripcion tweet prueba sec");
 			Date dateTweet = new Date( );
             SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd-hh:mm:ss");
@@ -246,6 +246,29 @@ public class TestTweetHibernateJPA {
 			//entityManager.close();
 			//entityManagerFactory.close();
 		}
+	}
+	
+	@Test
+	public void deleteRepeadList(){
+		
+		 ArrayList<String> lst = new ArrayList<String>();
+		    lst.add("ABC");
+		    lst.add("ABC");
+		    lst.add("ABCD");
+		    lst.add("ABCD");
+		    lst.add("ABCE");
+		    lst.add("ABC");
+		    
+		    System.out.println("Duplicates List "+lst);
+
+		    Object[] st = lst.toArray();
+		      for (Object s : st) {
+		        if (lst.indexOf(s) != lst.lastIndexOf(s)) {
+		            lst.remove(lst.lastIndexOf(s));
+		         }
+		      }
+
+		    System.out.println("Distinct List "+lst);
 	}
 	
 }
