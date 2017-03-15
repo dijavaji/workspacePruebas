@@ -7,8 +7,12 @@
 
 <h:head></h:head> 
 	<body> 
-		<h2>Analisis de Sentimiento Tweeter</h2>
+		<h1>Analisis de Sentimiento Tweeter</h1>
     	<h:form>
+    		<p:chart type="pie" model="#{chartViewBackBean.pieModel1}" style="width:600px;height:500px" />
+			
+			<h3>Technoloqie</h3>
+		    
     		<p:inputText value="#{sentimentAnalysisBackBean.name}"/>
     		<h:commandLink value="Bienvenido" action="welcome" />
     		<br />

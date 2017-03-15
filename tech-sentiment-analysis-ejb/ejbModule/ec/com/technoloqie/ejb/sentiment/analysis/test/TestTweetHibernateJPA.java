@@ -62,6 +62,7 @@ public class TestTweetHibernateJPA {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void listCandidato(){
 		// Obtener la factoría de sesiones
