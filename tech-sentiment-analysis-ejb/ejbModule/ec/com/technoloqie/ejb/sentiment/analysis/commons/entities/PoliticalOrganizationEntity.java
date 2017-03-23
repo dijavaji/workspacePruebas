@@ -1,10 +1,12 @@
 package ec.com.technoloqie.ejb.sentiment.analysis.commons.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -58,6 +60,9 @@ public class PoliticalOrganizationEntity implements Serializable{
 	
 	@Column(name="SEDEPRINCIPAL")
 	private String sede;
+	
+	@OneToMany(mappedBy="politicalOrganization")
+	private Collection<CandidateEntity> candidate;
 
 	public Integer getId() {
 		return id;
@@ -177,6 +182,14 @@ public class PoliticalOrganizationEntity implements Serializable{
 
 	public void setSede(String sede) {
 		this.sede = sede;
+	}
+
+	public Collection<CandidateEntity> getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Collection<CandidateEntity> candidate) {
+		this.candidate = candidate;
 	}
 
 }

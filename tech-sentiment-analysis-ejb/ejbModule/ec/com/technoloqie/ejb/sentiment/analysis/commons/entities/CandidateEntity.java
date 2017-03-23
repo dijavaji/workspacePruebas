@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -50,6 +53,10 @@ public class CandidateEntity implements Serializable{
 	
 	@Column(name="TWITTER")
 	private String twitter;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="IDORGPOL", insertable=false, updatable=false)
+	private PoliticalOrganizationEntity politicalOrganization;
 
 	public String getCedula() {
 		return cedula;
@@ -121,6 +128,31 @@ public class CandidateEntity implements Serializable{
 
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
+	}
+
+	public PoliticalOrganizationEntity getPoliticalOrganization() {
+		return politicalOrganization;
+	}
+
+	public void setPoliticalOrganization(
+			PoliticalOrganizationEntity politicalOrganization) {
+		this.politicalOrganization = politicalOrganization;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getIdOrganization() {
+		return idOrganization;
+	}
+
+	public void setIdOrganization(Integer idOrganization) {
+		this.idOrganization = idOrganization;
 	}
 
 }
