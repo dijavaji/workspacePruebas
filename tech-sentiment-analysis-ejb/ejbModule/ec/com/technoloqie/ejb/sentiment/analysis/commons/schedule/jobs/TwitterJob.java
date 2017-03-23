@@ -1,18 +1,19 @@
 package ec.com.technoloqie.ejb.sentiment.analysis.commons.schedule.jobs;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.naming.InitialContext;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import ec.com.technoloqie.ejb.sentiment.analysis.commons.log.SentimentAnalysisLog;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -20,9 +21,17 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.log.SentimentAnalysisLog;
+import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetEjbLocal;
 
+@Stateless
 public class TwitterJob implements Job{
-
+	
+	
+	@EJB(name="tweetBean")
+	private TweetEjbLocal tweetBean;
+	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		SentimentAnalysisLog.info("inicializa la ejecucion del job de tweeter");
@@ -43,69 +52,57 @@ public class TwitterJob implements Job{
 	        	Collection <String> candidatosCol = obtenerCandidatos();
 	        	
 	        	for (String candidato : candidatosCol) {
-	        		//String candidato= "MashiRafael";
 		        	Date dNow = new Date( );
 		            SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd-hh:mm:ss");
 
-		            System.out.println("Current Date: " + ft.format(dNow));
+		            SentimentAnalysisLog.info("Current Date: " + ft.format(dNow));
 		            Query query = new Query("@"+candidato);
 		            query.setCount(100);
 		            //query.setLang("en");
-		            SimpleDateFormat ftU = new SimpleDateFormat ("yyyy-MM-dd");
+		            //SimpleDateFormat ftU = new SimpleDateFormat ("yyyy-MM-dd");
 		            query.setSince("2017-01-20");
 		            //query.setUntil(ftU.format(dNow));
 		            QueryResult result;
 		            result = twitter.search(query);
 		            List<Status> tweets = result.getTweets();
-		            StringBuilder sb = new StringBuilder();
-		            PrintWriter writer = new PrintWriter("/home/thc/Documents/Diego/AnalisisDatos/alianzaPais/"+candidato+ft.format(dNow)+".txt", "UTF-8");
+		            Collection <TweetEntity> tweetscol = new ArrayList<TweetEntity>();
 		            for (Status tweet : tweets) {
-		            	//sb = new StringBuilder();
-		            	sb.delete(0, sb.length());
-		                sb.append(tweet.getCreatedAt());	//fecha creacion del tweet
-		                sb.append("|");
-		                sb.append(tweet.getUser().getScreenName());	//nombre del usuario
-		                sb.append("|");
-		                sb.append(tweet.getUser().getName());	//nombre del usuario completo
-		                sb.append("|");
-		                sb.append(tweet.getText());		//tweet texto
-		                sb.append("|");
-		                sb.append(tweet.getId());	//tweet id
-		                sb.append("|");
-		                sb.append(tweet.getSource());	//aplicacion q envio el tweet
-		                sb.append("|");
-		                sb.append(tweet.getUser().getFollowersCount());	//followers
-		                sb.append("|");
-		                sb.append(tweet.getUser().getFriendsCount());	//follows 
-		                sb.append("|");
-		                sb.append(tweet.getRetweetCount());		//retweets
-		                sb.append("|");
-		                sb.append(tweet.getFavoriteCount());	//favoritos
-		                sb.append("|");
-		                sb.append(tweet.getUser().isVerified());		//Whether this user has a verified badge.
-		                sb.append("|");
-		                sb.append(tweet.getUser().getCreatedAt());	//creado desde
-		                sb.append("|");
-		                sb.append(tweet.getUser().getLocation());		//location
-		                sb.append("|");
-		                sb.append(tweet.getUser().getDescription());	//bio
-		                sb.append("|");
-		                sb.append(tweet.getUser().getProfileImageURL());	//imagen de perfil
-		                sb.append("|");
-		                sb.append(tweet.getGeoLocation());	
-		                sb.append("|");
-		                sb.append(tweet.getUser().getId());
-		                SentimentAnalysisLog.info(sb.toString());
-		            	writer.println(sb);
+		            	TweetEntity twitt = new TweetEntity();	//variable para agregar a la coleccion
+		            	twitt.setDateTweet(tweet.getCreatedAt());	//fecha creacion del tweet
+		            	twitt.setScreenName(tweet.getUser().getScreenName());	//nombre del usuario
+		            	twitt.setName(tweet.getUser().getName());	//nombre del usuario completo
+		            	twitt.setTweet(tweet.getText());		//tweet texto
+		            	twitt.setIdTweet(tweet.getId());	//tweet id
+		            	twitt.setAplication(tweet.getSource());	//aplicacion q envio el tweet
+		            	twitt.setFollowers(tweet.getUser().getFollowersCount());	//followers
+		            	twitt.setFollow(tweet.getUser().getFriendsCount());	//follows 
+		            	twitt.setRetweet(tweet.getRetweetCount());		//retweets
+		            	twitt.setFavorite(tweet.getFavoriteCount());	//favoritos
+		            	if(tweet.getUser().isVerified()){	//Whether this user has a verified badge.
+		            		char verifica = '1';
+			            	twitt.setVerified(verifica);
+		            	}else{
+		            		char verifica = '0';
+			            	twitt.setVerified(verifica);
+		            	}
+		            	twitt.setCreatedAt(tweet.getUser().getCreatedAt());	//creado desde
+		            	twitt.setLocation(tweet.getUser().getLocation());		//location
+		            	twitt.setBioDescription(tweet.getUser().getDescription());	//bio
+		            	twitt.setProfileImageUrl(tweet.getUser().getProfileImageURL());	//imagen de perfil
+		            	if(tweet.getGeoLocation() != null){
+		            		twitt.setGeoLocation(tweet.getGeoLocation().toString());
+		            	}else{
+		            		twitt.setGeoLocation("null");
+		            	}
+		            		
+		            	twitt.setUserId(tweet.getUser().getId());
+		                //SentimentAnalysisLog.info(sb.toString());
+		            	tweetscol.add(twitt);
 		            }
-		            writer.close();
+		            insertTweets(tweetscol);
 				}
-	            //System.exit(0);
 	        } catch (TwitterException te) {
-	            SentimentAnalysisLog.info("Failed to search tweets: " + te.getMessage());
-	            //System.exit(-1);
-	        }catch (IOException e){
-	        	SentimentAnalysisLog.info("Error al escribir archivo: " + e.getMessage());
+	            SentimentAnalysisLog.error("Error al buscar los tweets: " + te.getMessage());
 	        }
 	}
 
@@ -113,7 +110,7 @@ public class TwitterJob implements Job{
 	private Collection <String> obtenerCandidatos() {
 		Collection <String> candidatosCol = new ArrayList();
 		candidatosCol.add("Lenin");
-		candidatosCol.add("LeninMorenoPAIS");
+		/*candidatosCol.add("LeninMorenoPAIS");
 		candidatosCol.add("35PAIS");
 		candidatosCol.add("35apd2gye");
 		candidatosCol.add("GabrielaEsPais");
@@ -137,8 +134,30 @@ public class TwitterJob implements Job{
 		candidatosCol.add("BloqueAP35"); 
 		candidatosCol.add("dorissoliz");
 		candidatosCol.add("marcelaguinaga"); 
-		candidatosCol.add("apguayas");
+		candidatosCol.add("apguayas");*/
 		return candidatosCol;
+	}
+	
+	private void insertTweets(Collection<TweetEntity> tweetscol) {
+		try {
+			tweetBean = (TweetEjbLocal) new InitialContext().lookup("java:global/tech-sentiment-analysis-ear/tech-sentiment-analysis-web/TweetEjb!ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetEjbLocal");
+			//tweetBean = new TweetEjb();
+			 //new InitialContext().lookup("java:global/classes/TweetEjb");
+			for (TweetEntity tweetEntity : tweetscol) {
+				tweetBean.createTweet(tweetEntity);
+			}
+			
+		} catch (Exception e) {
+			SentimentAnalysisLog.error("Error al buscar el bean tweetejb: " + e);
+		}
+	}
+
+	public TweetEjbLocal getTweetBean() {
+		return tweetBean;
+	}
+
+	public void setTweetBean(TweetEjbLocal tweetBean) {
+		this.tweetBean = tweetBean;
 	}
 
 }

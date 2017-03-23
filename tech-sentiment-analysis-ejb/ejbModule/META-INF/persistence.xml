@@ -1,10 +1,11 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?> -->
-<!--persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"-->
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-version="2.0">		
-		<persistence-unit name="tech-sentiment-analysis-ejb" transaction-type="JTA">
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+  xmlns="http://java.sun.com/xml/ns/persistence"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0">
+  
+   <persistence-unit name="tech-sentiment-analysis-ejb" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
    		<jta-data-source>java:jboss/datasources/MySql_jndi</jta-data-source>
     	<class>ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity</class>
@@ -12,34 +13,34 @@ version="2.0">
 	    <class>ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.PoliticalOrganizationEntity</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
-			<!--Hibernate properties-->
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/> 
+			<!-- Hibernate properties -->
+			<property name="hibernate.hbm2ddl.auto" value="update"/> 
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="false"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			
-			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/> -->
-			<!-- <property name="hibernate.dialect"  value="org.hibernate.dialect.HSQLDialect"/>	 -->
-			<!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
-			<!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+			<property name="hibernate.dialect"  value="org.hibernate.dialect.HSQLDialect"/>	
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value="YOUR_PASSWORD"/> -->
 		</properties>
-	</persistence-unit>
-	
+</persistence-unit> 
+
 	<!-- <persistence-unit name="mysql-localhost">
 	       <provider>org.hibernate.ejb.HibernatePersistence</provider>
-	       <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	       
 	       <class>ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity</class>
 	       <class>ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.CandidateEntity</class>
 	       <class>ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.PoliticalOrganizationEntity</class>
 	       <properties>
 	           <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-	           <property name="hibernate.connection.url" value="jdbc:mysql://localhost/tec_test_db"/>
-	           <property name="hibernate.connection.username" value="root"/>
-	           <property name="hibernate.connection.password" value="Password01"/>
+	           <property name="hibernate.connection.url" value="jdbc:mysql://192.168.1.50/DESARROLLO"/>
+	           <property name="hibernate.connection.username" value="TECHDES"/>
+	           <property name="hibernate.connection.password" value="TECHDES"/>
 	           <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 	           <property name="hibernate.hbm2ddl.auto" value="update"/>
 	           Hibernate Search
@@ -48,5 +49,7 @@ version="2.0">
 				<property name="hibernate.show_sql" value="true"/>
 				<property name="hibernate.format_sql" value="true"/>
 	        </properties>
-	</persistence-unit> --> 
+	</persistence-unit>  -->
+  	
+	 
 </persistence>

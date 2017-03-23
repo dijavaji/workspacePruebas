@@ -1,6 +1,7 @@
 package ec.com.technoloqie.ejb.sentiment.analysis.persistence.businesslogic;
 
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -30,19 +31,26 @@ public class TweetEjb implements TweetEjbLocal {
     private EntityManager em;
 
 	@Override
-	public void createTweet(TweetEntity tweet) {
-		em.persist(tweet);
-		
+	public void createTweet(TweetEntity tweet) throws SentimentAnalysisException {
+		try{
+			//em.getTransaction().begin();
+			em.persist(tweet);
+			em.flush();
+			//em.getTransaction().commit();
+		}catch(Exception e){
+			SentimentAnalysisLog.error("Error al crear un tweet", e);
+			throw new SentimentAnalysisException("Error al crear un tweet", e);
+		} 
 	}
 
 	@Override
-	public TweetEntity findTweetId(Integer codigo) {
+	public TweetEntity findTweetId(Integer codigo) throws SentimentAnalysisException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public TweetEntity findTweetNombre(String nombre) {
+	public TweetEntity findTweetNombre(String nombre) throws SentimentAnalysisException{
 		CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<TweetEntity> criteria = cb.createQuery(TweetEntity.class);
         Root<TweetEntity> member = criteria.from(TweetEntity.class);
@@ -54,13 +62,13 @@ public class TweetEjb implements TweetEjbLocal {
 	}
 
 	@Override
-	public void deleteTweet(TweetEntity tweet) {
+	public void deleteTweet(TweetEntity tweet) throws SentimentAnalysisException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public TweetEntity updateTweet(TweetEntity tweet) {
+	public TweetEntity updateTweet(TweetEntity tweet) throws SentimentAnalysisException{
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,6 +92,14 @@ public class TweetEjb implements TweetEjbLocal {
 			session.close();
 		}
 		return tweets;
+	}
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 
 }

@@ -1,5 +1,6 @@
 package ec.com.technoloqie.ejb.sentiment.analysis.commons.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="SASTDATOTWITTER")
-public class TweetEntity {
+public class TweetEntity implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 

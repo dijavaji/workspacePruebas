@@ -1,15 +1,13 @@
 package ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.id;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
 @SuppressWarnings("serial")
-@Embeddable
+//@Embeddable
 public class CandidateEntityId {
 	
 	public static final String NOMBRE_SECUENCIA = "SSPCOSECARCIMPR";
 	
-	@Column(name="IDCANDIDATO",nullable=false)
+	/*@Column(name="IDCANDIDATO",nullable=false)
 	private Integer id;
 	
 	@Column(name="IDORGPOL",nullable=false)
@@ -29,5 +27,5 @@ public class CandidateEntityId {
 
 	public void setIdOrganization(Integer idOrganization) {
 		this.idOrganization = idOrganization;
-	}
+	}*/
 }

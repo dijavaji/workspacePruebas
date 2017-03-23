@@ -3,19 +3,26 @@ package ec.com.technoloqie.ejb.sentiment.analysis.commons.entities;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
-
-import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.id.CandidateEntityId;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="SASTCANDIDATO")
 public class CandidateEntity implements Serializable{
 	
-	@EmbeddedId
-	CandidateEntityId id = new CandidateEntityId();
+	//@EmbeddedId
+	//CandidateEntityId id = new CandidateEntityId();
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="IDCANDIDATO",nullable=false)
+	private Integer id;
+	
+	@Column(name="IDORGPOL",nullable=false)
+	private Integer idOrganization;
 	
 	@Column(name="CEDULA")
 	private String cedula;
@@ -116,12 +123,4 @@ public class CandidateEntity implements Serializable{
 		this.twitter = twitter;
 	}
 
-	public CandidateEntityId getId() {
-		return id;
-	}
-
-	public void setId(CandidateEntityId id) {
-		this.id = id;
-	}
-	
 }
