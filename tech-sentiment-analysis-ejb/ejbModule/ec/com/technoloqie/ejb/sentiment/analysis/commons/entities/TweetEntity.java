@@ -68,7 +68,10 @@ public class TweetEntity implements Serializable{
 	private String geoLocation;
 	
 	@Column(name="IDUSUARIO")
-	private Long userId;
+	private Integer userId;
+	
+	@Column(name="IDUSUARIOTWEET")
+	private Long userIdTweet;
 	
 	//getters and setters
 	public Integer getId() {
@@ -161,12 +164,6 @@ public class TweetEntity implements Serializable{
 	public void setGeoLocation(String geoLocation) {
 		this.geoLocation = geoLocation;
 	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
 	public Integer getFollow() {
 		return follow;
 	}
@@ -178,5 +175,17 @@ public class TweetEntity implements Serializable{
 	}
 	public void setRetweet(Integer retweet) {
 		this.retweet = retweet;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public Long getUserIdTweet() {
+		return userIdTweet;
+	}
+	public void setUserIdTweet(Long userIdTweet) {
+		this.userIdTweet = userIdTweet;
 	}
 }

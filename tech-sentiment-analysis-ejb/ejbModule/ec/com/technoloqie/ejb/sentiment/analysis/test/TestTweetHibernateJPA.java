@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.CandidateEntity;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.exception.SentimentAnalysisException;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.log.SentimentAnalysisLog;
@@ -65,6 +68,31 @@ public class TestTweetHibernateJPA {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void listCandidato(){
+		// Obtener la factoría de sesiones
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-localhost");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		Session session = (Session)entityManager.getDelegate();	//obtener el objeto Session con el que acceder a la API de hibernate.
+		Transaction tx = null;
+		try{
+		 	tx = session.beginTransaction();
+			Criteria cr = session.createCriteria(CandidateEntity.class);
+			Collection <CandidateEntity> results = (Collection <CandidateEntity>)cr.list();
+			for (CandidateEntity object : results) {
+				SentimentAnalysisLog.info("nombre: " + object.getFirstName());
+				SentimentAnalysisLog.info("organizacion: " + object.getIdOrganization());
+			}
+		}catch(Exception e){
+			if (tx!=null) tx.rollback();
+			SentimentAnalysisLog.error("Error al buscar un tweet", e);
+			throw new SentimentAnalysisException("Error al buscar un tweet", e);
+			
+		}finally{
+			session.close();
+		}
+	}
+	
+	@Test
+	public void listTweet(){
 		// Obtener la factoría de sesiones
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-localhost");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -174,7 +202,7 @@ public class TestTweetHibernateJPA {
 				        			twitt.setGeoLocation(st.nextToken());
 					        	}
 				        		if(st.hasMoreTokens()){
-				        			twitt.setUserId(Long.parseLong(st.nextToken()));
+				        			twitt.setUserIdTweet(Long.parseLong(st.nextToken()));
 					        	}
 				        	}
 				        	
@@ -271,5 +299,18 @@ public class TestTweetHibernateJPA {
 
 		    System.out.println("Distinct List "+lst);
 	}
+	
+	@Test
+	public void sqlTest() throws Exception {
+		// Class.forName( "com.mysql.jdbc.Driver" ); // do this in init
+		// // edit the jdbc url 
+		Connection conn = DriverManager.getConnection( 
+		    "jdbc:mysql://localhost:3306/projects?user=user1&password=123");
+		// Statement st = conn.createStatement();
+		// ResultSet rs = st.executeQuery( "select * from table" );
+		
+		System.out.println("Connected?");
+	}
+	
 	
 }

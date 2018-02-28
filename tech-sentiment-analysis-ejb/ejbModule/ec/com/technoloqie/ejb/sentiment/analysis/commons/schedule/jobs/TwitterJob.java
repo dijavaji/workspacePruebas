@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -21,8 +22,11 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.CandidateEntity;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.entities.TweetEntity;
+import ec.com.technoloqie.ejb.sentiment.analysis.commons.exception.SentimentAnalysisException;
 import ec.com.technoloqie.ejb.sentiment.analysis.commons.log.SentimentAnalysisLog;
+import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.CandidateEjbLocal;
 import ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.TweetEjbLocal;
 
 @Stateless
@@ -31,6 +35,8 @@ public class TwitterJob implements Job{
 	
 	@EJB(name="tweetBean")
 	private TweetEjbLocal tweetBean;
+	@EJB(name="candidateBean")
+	private CandidateEjbLocal candidateBean;
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -49,14 +55,14 @@ public class TwitterJob implements Job{
 	    TwitterFactory tf = new TwitterFactory(cb.build());
 	    Twitter twitter = tf.getInstance();
 	        try {
-	        	Collection <String> candidatosCol = obtenerCandidatos();
+	        	Collection <CandidateEntity> candidatosCol = obtenerCandidatos();
 	        	
-	        	for (String candidato : candidatosCol) {
+	        	for (CandidateEntity candidato : candidatosCol) {
 		        	Date dNow = new Date( );
 		            SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd-hh:mm:ss");
 
-		            SentimentAnalysisLog.info("Current Date: " + ft.format(dNow));
-		            Query query = new Query("@"+candidato);
+		            SentimentAnalysisLog.info("Hora actual del job: " + ft.format(dNow));
+		            Query query = new Query(candidato.getTwitter());
 		            query.setCount(100);
 		            //query.setLang("en");
 		            //SimpleDateFormat ftU = new SimpleDateFormat ("yyyy-MM-dd");
@@ -95,7 +101,7 @@ public class TwitterJob implements Job{
 		            		twitt.setGeoLocation("null");
 		            	}
 		            		
-		            	twitt.setUserId(tweet.getUser().getId());
+		            	twitt.setUserIdTweet(tweet.getUser().getId());
 		                //SentimentAnalysisLog.info(sb.toString());
 		            	tweetscol.add(twitt);
 		            }
@@ -106,10 +112,18 @@ public class TwitterJob implements Job{
 	        }
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private Collection <String> obtenerCandidatos() {
-		Collection <String> candidatosCol = new ArrayList();
-		candidatosCol.add("Lenin");
+	private Collection <CandidateEntity> obtenerCandidatos() throws SentimentAnalysisException{
+		Collection <CandidateEntity> candidatosCol = null;
+		
+		try {
+			candidateBean = (CandidateEjbLocal) new InitialContext().lookup("java:global/tech-sentiment-analysis-ear/tech-sentiment-analysis-web/CandidateEjb!ec.com.technoloqie.ejb.sentiment.analysis.persistence.business.CandidateEjbLocal");
+			candidatosCol = candidateBean.findCandidates();
+		} catch (NamingException e) {
+			SentimentAnalysisLog.error("Error al buscar los usuarios: " + e.getMessage());
+			throw new SentimentAnalysisException();
+		}
+		
+		//candidatosCol.add("Lenin");
 		/*candidatosCol.add("LeninMorenoPAIS");
 		candidatosCol.add("35PAIS");
 		candidatosCol.add("35apd2gye");
@@ -158,6 +172,14 @@ public class TwitterJob implements Job{
 
 	public void setTweetBean(TweetEjbLocal tweetBean) {
 		this.tweetBean = tweetBean;
+	}
+
+	public CandidateEjbLocal getCandidateBean() {
+		return candidateBean;
+	}
+
+	public void setCandidateBean(CandidateEjbLocal candidateBean) {
+		this.candidateBean = candidateBean;
 	}
 
 }
