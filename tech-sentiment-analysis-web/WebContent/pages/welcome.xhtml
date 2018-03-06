@@ -8,7 +8,66 @@
 		<title>JSF 2.0 Hola Mundo</title>		
 	</h:head> 
 	<body> 
-		<h2>JSF 2.0 Hola mundo ejemplo - bienvenido</h2>
-    	<!-- <h2>Welcome #{sentimentAnalysisBackBean.name}</h2> -->
+		<ui:composition template="../masterTemplate.xhtml"
+		  xmlns:te="http://java.sun.com/jsf/composite/components"> 
+		
+			<ui:define name="windowTitle">
+				Sentimientos smart
+			</ui:define>
+			<ui:define name="headerMenu">
+			 
+			</ui:define>
+			
+			<ui:define name="contentHeader">
+						
+			</ui:define>
+			
+			<ui:define name="content">
+				<f:view transient="true">
+					<!-- Container (Services Section) -->
+					<div id="services" class="container-fluid text-center">
+					  <h2>SERVICES</h2>
+					  <h4>What we offer</h4>
+					  <br></br>
+					  <div class="row slideanim">
+					    <div class="col-sm-4">
+					      <span class="glyphicon glyphicon-off logo-small"></span>
+					      <h4>POWER</h4>
+					      <h:commandButton  value="Ingresar"  id="Btingresar" title="Ingresar" action="/pages/sentiment" />	
+					    </div>
+					    <div class="col-sm-4">
+					      <span class="glyphicon glyphicon-heart logo-small"></span>
+					      <h4>LOVE</h4>
+					      <p>Lorem ipsum dolor sit amet..</p>
+					    </div>
+					    <div class="col-sm-4">
+					      <span class="glyphicon glyphicon-lock logo-small"></span>
+					      <h4>JOB DONE</h4>
+					      <p>Lorem ipsum dolor sit amet..</p>
+					    </div>
+					  </div>
+					  <br></br><br></br>
+					  <div class="row slideanim">
+					    <div class="col-sm-4">
+					      <span class="glyphicon glyphicon-leaf logo-small"></span>
+					      <h4>GREEN</h4>
+					      <p>Lorem ipsum dolor sit amet..</p>
+					    </div>
+					    <div class="col-sm-4">
+					      <span class="glyphicon glyphicon-certificate logo-small"></span>
+					      <h4>CERTIFIED</h4>
+					      <p>Lorem ipsum dolor sit amet..</p>
+					    </div>
+					    <div class="col-sm-4">
+					      <span class="glyphicon glyphicon-wrench logo-small"></span>
+					      <h4 style="color:#303030;">HARD WORK</h4>
+					      <p>Lorem ipsum dolor sit amet..</p>
+					    </div>
+					  </div>
+					</div> 
+				</f:view>
+			</ui:define>
+		
+		</ui:composition>
 	</body> 
 </html>

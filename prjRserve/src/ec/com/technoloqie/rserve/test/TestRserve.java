@@ -63,7 +63,7 @@ public class TestRserve {
 	public void testExecuteFunction(){
 		RConnection connection = null;
 		try {
-			connection = new RConnection("127.0.0.1",6311);
+			connection = new RConnection("192.168.1.2",6311);
 			String[] myarr = new String[]{"c(1,2,3,4)"};
 			String mean = executeStringFunction(connection,"mean",myarr);
 			System.out.println("The mean of given vector is=" + mean);
