@@ -20,7 +20,7 @@ import javax.persistence.Query;
 @Stateless
 public class TipoUsuarioManejador implements TipoUsuarioManejadorRemote {
     
-    @PersistenceContext(unitName = "SubastaAplication1.0-ejbPU")
+    @PersistenceContext(unitName = "SubastaApplication-ejbPU")
 
      private EntityManager em; 
     

@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ec.com.technoloqie.subasta</groupId>
+	<artifactId>tec-subastaAplication-ear</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ear</packaging>
+  	<dependencies>
+	  <dependency>
+	    <groupId>ec.com.technoloqie.subasta</groupId>
+	    <artifactId>tec-subastaAplication-war</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	    <type>war</type>
+	  </dependency>
+	</dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.8</version>
+        <configuration>
+          <earSourceDirectory>EarContent</earSourceDirectory>
+          <version>6</version>
+          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <displayName>SubastaApp</displayName>
+	      <generateApplicationXml>false</generateApplicationXml>
+	      <modules>
+	        	<webModule>
+	        		<groupId>ec.com.technoloqie.subasta</groupId>
+	    			<artifactId>tec-subastaAplication-war</artifactId>
+	    			<bundleFileName>SubastaAplication-war.war</bundleFileName>
+	    			<contextRoot>/SubastaAplication-web</contextRoot>
+	        	</webModule>
+	        </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

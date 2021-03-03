@@ -1,0 +1,112 @@
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"                
+                template="../masterTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<f:metadata>
+		<f:viewAction action="#{usuariosController.actualizaModeloUsuarios()}"></f:viewAction>
+	</f:metadata>
+    <ui:define name="content">
+		<!-- listado selección usuarios -->
+		<h:form id="formulario">
+
+			<p:panelGrid id="paneltrabajos" cellpadding="5" columns="1" style="margin-bottom:10px">
+		        <f:facet name="header">
+		            <p:panel styleClass="fondo-botonera" style="background-color: #E6F0FF !important;">
+						<div style="text-align: right;">
+							<p:button value="Salir" outcome="/inicio" />
+							<p:button value="Crear" outcome="/pages/usuario" />
+						</div>		            
+		            </p:panel>	        
+		        </f:facet>
+		<p:dataTable id="tabla" var="trabajo" value="#{usuariosController.usuarios}">
+			<!-- datos -->
+		    <p:column headerText="N. Registro">
+		        <h:outputText value="#{trabajo.id}" />
+		    </p:column>
+		 
+		    <p:column headerText="Nombre" priority="3">
+		        <h:outputText value="#{trabajo.nombre}" />
+		    </p:column>
+		 
+		    <p:column headerText="Email" priority="2">
+		        <h:outputText value="#{trabajo.email}" />
+		    </p:column>
+		    <p:column headerText="Direccion" priority="4">
+		        <h:outputText value="#{trabajo.direccion}" />
+		    </p:column>
+		    
+			<!-- acciones -->
+		    <p:column headerText="" priority="1" resizable="false" width="14em;">
+		        <p:commandButton action="#{usuariosController.eliminar(trabajo)}" update="" icon="ui-icon-trash">
+		        		<p:confirm header="Borrado de usuario" message="Pulsa Confirmar para confirmar acción" icon="ui-icon-alert" />
+		        </p:commandButton>
+				&#160;
+		        <p:button outcome="/pages/usuario" icon="ui-icon-pencil">
+		        	<f:param name="idTrabajo" value="#{trabajo.id}"></f:param>
+		        </p:button>
+				&#160;
+		        <p:commandButton update="" icon="ui-icon-search" oncomplete="PF('trabajoDialog').show()">
+		        	<f:setPropertyActionListener value="#{trabajo}" target="#{usuariosController.usuarioSeleccionado}"></f:setPropertyActionListener>
+		        </p:commandButton>
+            		        	        
+		    </p:column>	    		    
+		    
+		</p:dataTable>
+</p:panelGrid>		
+	
+	<!-- diálogo confirmación borrado -->	
+	<p:confirmDialog global="true" styleClass="change-position">
+			<p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+			<p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+	</p:confirmDialog>	
+	
+	<!-- diálogo consulta item usuario -->
+	<p:dialog header="Datos del trabajo" widgetVar="trabajoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+	        <p:outputPanel id="trabajoDetail" style="text-align:center;">
+	        <p:tabView>
+	        <p:tab title="Datos básicos">
+	            <p:panelGrid style="width:30em;" columns="2" rendered="#{not empty usuariosController.usuarioSeleccionado}" columnClasses="label,value">
+	                <f:facet name="header">
+	                    <h:outputText value="#{usuariosController.usuarioSeleccionado.id}" /> 
+	                </f:facet>
+	                <h:outputText value="Nombre:" />
+	                <h:outputText value="#{usuariosController.usuarioSeleccionado.nombre}" />
+	                <h:outputText value="Apellido:" />
+	                <h:outputText value="#{usuariosController.usuarioSeleccionado.apellido}" />
+	                <h:outputText value="Email:" />
+	                <h:outputText value="#{usuariosController.usuarioSeleccionado.email}" />
+	                <h:outputText value="Tlf:" />
+	                <h:outputText value="#{usuariosController.usuarioSeleccionado.pass}" />
+	            </p:panelGrid>
+	        </p:tab>
+	        <p:tab title="Descripción">
+	        	<p:panelGrid  style="width:30em;" columns="2" rendered="#{not empty usuariosController.usuarioSeleccionado}" >
+	                <f:facet name="header">
+	                    <h:outputText value="#{usuariosController.usuarioSeleccionado.id}" /> 
+	                </f:facet>
+	                <h:outputText value="Descripción:" />
+	                <h:outputText value="#{usuariosController.usuarioSeleccionado.direccion}" />
+	            </p:panelGrid>    
+	        </p:tab>
+	            
+	        </p:tabView>
+	        </p:outputPanel>
+	</p:dialog>	
+      		
+		</h:form>
+	    	
+	</ui:define>
+
+	<!-- 
+	<p:confirmDialog global="true" appendTo="@(body)">
+		<h:form>
+			<p:commandButton value="Confirmar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+			<p:commandButton value="Cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+		</h:form>
+	</p:confirmDialog>
+ -->
+
+</ui:composition>

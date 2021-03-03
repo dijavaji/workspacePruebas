@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PujaManejador implements PujaManejadorRemote {
-     @PersistenceContext(unitName = "SubastaAplication1.0-ejbPU")
+     @PersistenceContext(unitName = "SubastaApplication-ejbPU")
 
      private EntityManager em; 
 

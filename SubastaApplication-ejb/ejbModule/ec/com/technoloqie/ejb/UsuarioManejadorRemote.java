@@ -16,9 +16,9 @@ import java.util.List;
 @Remote
 public interface UsuarioManejadorRemote {
      //public void crearUsuario(String nombre, String direccion, String email);
-    public void crearUsuario(Usuario usuario);
-    public Usuario obtenerUsuario(Integer codigo);
-    public void eliminarUsuario(Usuario usuario);
-    public Usuario actualizarUsuario(Usuario usuario);
-    public List <Usuario> listarUsuario();
+     void crearUsuario(Usuario usuario);
+     Usuario obtenerUsuario(Integer codigo);
+     void eliminarUsuario(Usuario usuario);
+     Usuario actualizarUsuario(Usuario usuario);
+     List <Usuario> listarUsuario();
 }
