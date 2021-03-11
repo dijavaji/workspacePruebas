@@ -17,11 +17,11 @@
         <meta name="author" content="Technoloqie asesoramiento informatico."/>
         <title><ui:insert name="windowTitle"/></title>
 		
-		<link rel="apple-touch-icon" href="./resources/images/apple-touch-icon.png" type="image/x-icon"/>
-        <link rel="stylesheet" href="./resources/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="./resources/css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" href="./resources/css/main.css"/>
-        <script src="./resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+		<link rel="apple-touch-icon" href="#{request.contextPath}/resources/images/apple-touch-icon.png" type="image/x-icon"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/main.css"/>
+        <script src="#{request.contextPath}/resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <style>
             body {
                 padding-top: 50px;
@@ -52,7 +52,7 @@
 		    <div class="form-group">
 		      <input type="password" placeholder="Password" class="form-control"/>
 		    </div>
-		    <button type="submit" class="btn btn-success" formaction="pages/welcome.jsf">Ingresar</button>
+		    <button type="submit" class="btn btn-success" formaction="inicio.xhtml">Ingresar</button>
 		  </form>
 		</div><!--/.navbar-collapse -->
       </div>
@@ -104,7 +104,7 @@
 	  	</div> <!-- /container -->        
 	   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script> -->
-	   <script src="./resources/js/vendor/bootstrap.min.js"></script>
-	   <script src="./resources/js/main.js"></script>
+	   <script src="#{request.contextPath}/resources/js/vendor/bootstrap.min.js"></script>
+	   <script src="#{request.contextPath}/resources/js/main.js"></script>
     </body>
 </html>
