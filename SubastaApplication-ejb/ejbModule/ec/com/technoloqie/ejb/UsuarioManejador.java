@@ -32,10 +32,4 @@ public class UsuarioManejador extends AbstractManejador<Usuario> {
      	return em;
      }
      
-     // comprobación de restricción de clave natural (unique)
-     @SuppressWarnings("rawtypes")
-     public List findByNaturalId(String numeroDeRegistro){
-    	 return em.createNamedQuery("Trabajo.findByNaturalId").
-         setParameter("numeroDeRegistro", numeroDeRegistro).getResultList();    	
-     }
 }

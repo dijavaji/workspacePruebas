@@ -1,19 +1,15 @@
 package ec.com.technoloqie.entidades;
 import java.io.Serializable;
-import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -47,18 +43,10 @@ public class Usuario implements Serializable {
     @Column(name="PASS")
     private String pass;// pass
     
-    /*@ManyToOne
-    private TipoUsuario tipo_usuario;
-
-    public TipoUsuario getTipo_usuario() {
-        return tipo_usuario;
-    }
-
-    public void setTipo_usuario(TipoUsuario tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
-    }
-*/
-
+    @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="TIPOUSUARIOID")
+    private TipoUsuario tipoUsuario;
+    
     public String getPass() {
         return pass;
     }
@@ -142,6 +130,14 @@ public class Usuario implements Serializable {
     public String toString() {
         return "ec.edu.uce.entidades.Usuario[ id=" + id + " ]";
     }
+
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
   
 }
     
