@@ -12,15 +12,15 @@
 		<!-- listado selección usuarios -->
 
 
-			<p:panelGrid id="paneltrabajos" cellpadding="5" columns="1" style="margin-bottom:10px">
-		        <f:facet name="header">
-		            <p:panel styleClass="fondo-botonera" style="background-color: #E6F0FF !important;">
-						<div style="text-align: right;">
-							<p:button value="Salir" outcome="/inicio" />
-							<p:button value="Crear" outcome="/pages/usuario" />
-						</div>		            
-		            </p:panel>	        
-		        </f:facet>
+	<p:panelGrid id="panelusuarios" cellpadding="5" columns="1" style="margin-bottom:10px">
+		<f:facet name="header">
+	    	<p:panel styleClass="fondo-botonera" style="background-color: #E6F0FF !important;">
+				<div style="text-align: right;">
+					<p:button value="Salir" outcome="/inicio" />
+					<p:button value="Crear" outcome="/pages/usuario" />
+				</div>		            
+			</p:panel>	        
+	    </f:facet>
 		<p:dataTable id="tabla" var="trabajo" value="#{usuariosController.usuarios}">
 			<!-- datos -->
 		    <p:column headerText="N. Registro">
@@ -34,13 +34,15 @@
 		    <p:column headerText="Email" priority="2">
 		        <h:outputText value="#{trabajo.email}" />
 		    </p:column>
-		    <p:column headerText="Direccion" priority="4">
+		    <p:column headerText="Direccion" priority="4">​
+
+		    
 		        <h:outputText value="#{trabajo.direccion}" />
 		    </p:column>
 		    
 			<!-- acciones -->
 		    <p:column headerText="" priority="1" resizable="false" width="14em;">
-		        <p:commandButton action="#{usuariosController.eliminar(trabajo)}" update="" icon="ui-icon-trash">
+		        <p:commandButton action="#{usuariosController.eliminar(trabajo)}" update="frmContent:panelusuarios" icon="ui-icon-trash">
 		        		<p:confirm header="Borrado de usuario" message="Pulsa Confirmar para confirmar acción" icon="ui-icon-alert" />
 		        </p:commandButton>
 				&#160;
@@ -48,7 +50,7 @@
 		        	<f:param name="idUsuario" value="#{trabajo.id}"></f:param>
 		        </p:button>
 				&#160;
-		        <p:commandButton update="" icon="ui-icon-search" oncomplete="PF('trabajoDialog').show()">
+		        <p:commandButton update=":frmContent:usuarioDetail" icon="ui-icon-search" oncomplete="PF('usuarioDialog').show()">
 		        	<f:setPropertyActionListener value="#{trabajo}" target="#{usuariosController.usuarioSeleccionado}"></f:setPropertyActionListener>
 		        </p:commandButton>
             		        	        
@@ -64,11 +66,11 @@
 	</p:confirmDialog>	
 	
 	<!-- diálogo consulta item usuario -->
-	<p:dialog header="Datos del trabajo" widgetVar="trabajoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-	        <p:outputPanel id="trabajoDetail" style="text-align:center;">
+	<p:dialog header="Datos del trabajo" widgetVar="usuarioDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+	        <p:outputPanel id="usuarioDetail" style="text-align:center;">
 	        <p:tabView>
 	        <p:tab title="Datos básicos">
-	            <p:panelGrid style="width:30em;" columns="2" rendered="#{not empty usuariosController.usuarioSeleccionado}" columnClasses="label,value">
+	            <p:panelGrid style="width:30em;" columns="2" rendered="#{not empty usuariosController.usuarioSeleccionado}" columnClasses="">
 	                <f:facet name="header">
 	                    <h:outputText value="#{usuariosController.usuarioSeleccionado.id}" /> 
 	                </f:facet>
@@ -82,7 +84,7 @@
 	                <h:outputText value="#{usuariosController.usuarioSeleccionado.pass}" />
 	            </p:panelGrid>
 	        </p:tab>
-	        <p:tab title="Descripción">
+	        <p:tab title="Dirección">
 	        	<p:panelGrid  style="width:30em;" columns="2" rendered="#{not empty usuariosController.usuarioSeleccionado}" >
 	                <f:facet name="header">
 	                    <h:outputText value="#{usuariosController.usuarioSeleccionado.id}" /> 
