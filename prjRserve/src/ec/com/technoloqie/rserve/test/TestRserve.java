@@ -47,12 +47,13 @@ public class TestRserve {
             connection = new RConnection("127.0.0.1",6311);
 
             /* Note four slashes (\\\\) in the path */
-            connection.eval("source('/home/thc/workspacePruebas/prjRserve/resources/myScript.R')");
+            connection.eval("source('/home/diego/workspace/workspacePruebas/prjRserve/resources/myScript.R')");
             int num1 = 10;
             int num2 = 20;
             int sum = connection.eval("myAdd("+num1+","+num2+")").asInteger();
             System.out.println("The sum is=" + sum);
         } catch (RserveException e) {
+        	System.out.println("Error test de funcion " + e);
             e.printStackTrace();
         } catch (REXPMismatchException e) {
             e.printStackTrace();
@@ -124,5 +125,23 @@ public class TestRserve {
 	        // TODO: ...
 	    }
 	}
+	
+	
+	public void test() {
+
+	        // For user input
+	        //Scanner scanner = new Scanner(System.in );
+	        System.out.println("Enter the file path: ");
+
+	        //dirPath = scanner.nextLine();
+	        String dirPath = "";
+	        RConnection c = new RConnection();
+	        // source the Palindrome function
+	        c.eval("source('/home/workspace/TestR/testMain.R')");
+
+	        REXP valueReturned = c.eval("testMain(\""+dirPath+"\")");
+	       System.out.println(valueReturned.asString());
+	    }
+	
 
 }
