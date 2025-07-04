@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_76"/>
-	<classpathentry kind="lib" path="C:/Users/dvasquez/.eclipse/librerias/quartz-1.8.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dvasquez/.eclipse/librerias/junit-4.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dvasquez/.eclipse/librerias/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/dvasquez/.eclipse/librerias/slf4j-log4j12-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/thc/workspacePruebas/workspacePruebas/prjPruebaQuartz/lib/quartz-1.8.6.jar"/>
+	<classpathentry kind="lib" path="/home/thc/workspacePruebas/workspacePruebas/prjPruebaQuartz/lib/junit-4.10.jar" sourcepath="/root/.m2/repository/junit/junit/4.10/junit-4.10-sources.jar"/>
+	<classpathentry kind="lib" path="/home/thc/workspacePruebas/workspacePruebas/prjPruebaQuartz/lib/slf4j-log4j12-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/thc/workspacePruebas/workspacePruebas/prjPruebaQuartz/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

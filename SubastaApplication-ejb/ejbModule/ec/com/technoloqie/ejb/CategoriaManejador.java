@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class CategoriaManejador implements CategoriaManejadorRemote {
     
-     @PersistenceContext(unitName = "SubastaAplication1.0-ejbPU")
+     @PersistenceContext(unitName = "SubastaApplication-ejbPU")
 
      private EntityManager em; 
 

@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ec.com.tech.sentiment.analysis</groupId>
+	<artifactId>tech-sentiment-root</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>../tech-sentiment-analysis-ejb</module>
+		<module>../tech-sentiment-analysis-web</module>
+		<module>../tech-sentiment-analysis-ear</module>
+	</modules>
+	
+	<repositories>
+		<repository>
+		        <id>jboss-repository</id>
+		        <name>JBoss Repository</name>
+		        <url>http://repository.jboss.com/maven2</url>
+		        <layout>default</layout>
+		</repository>
+    </repositories>
+	
+	<dependencies>
+    <!-- ================= Internal dependecies ================= -->
+	
+	<!-- ================= External dependecies ================= -->
+	    <!-- <dependency>
+	        <groupId>javax.persistence</groupId>
+	        <artifactId>persistence-api</artifactId>
+	        <version>1.0</version>
+	        <scope>provided</scope>
+	    </dependency>    -->
+<!-- 	    <dependency>
+	        <groupId>jboss</groupId>
+	        <artifactId>jboss-ejb-api</artifactId>
+	        <version>4.2.0.GA</version>
+	        <scope>provided</scope>
+	    </dependency> -->
+	    <dependency>
+		    <groupId>org.jboss.ejb3</groupId>
+		    <artifactId>jboss-ejb3-api</artifactId>
+		    <version>3.1.0</version>
+		</dependency>
+	
+<!-- 	    <dependency>
+	        <groupId>junit</groupId>
+	        <artifactId>junit</artifactId>
+	        <version>3.8.1</version>
+	        <scope>test</scope>
+	    </dependency> -->
+	    <!-- Import the JPA API, we use provided scope as the API is included in JBoss -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>4.3.0.Final</version>
+		</dependency>
+        
+        <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.10</version>
+		    <scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+	    	<groupId>mysql</groupId>
+	    	<artifactId>mysql-connector-java</artifactId>
+	    	<version>5.1.40</version>
+	    	<!-- <scope>test</scope> -->
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-core</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+	
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-async</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-media-support</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-stream</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		
+		<!-- Quartz scheduler framework -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.1.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.primefaces</groupId>
+		    <artifactId>primefaces</artifactId>
+		    <version>5.3</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.5</version>
+		</dependency>
+	
+	</dependencies>
+	
+	<build>
+	  
+	  <plugins>
+	    <plugin>
+	      <artifactId>maven-compiler-plugin</artifactId>
+	      <version>3.1</version>
+	      <configuration>
+	        <source>1.7</source>
+	        <target>1.7</target>
+	      </configuration>
+	    </plugin>
+	    
+	  </plugins>
+	</build>
+</project>

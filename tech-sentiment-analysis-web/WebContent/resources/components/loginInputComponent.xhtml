@@ -1,0 +1,40 @@
+<!--
+    Document   : componente de login
+    Created on : 03-09-2014
+    Author     : thc
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	<composite:interface shortDescription="Componente para el ingreso del login de usuario ">
+		<composite:attribute name="oncomplete"/>
+		<composite:attribute name="delegateAuditMail" required="true" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+		<h:panelGrid cellpadding="5" cellspacing="0" columns="3">
+
+               <h:outputLabel value="E-mail:"/>
+               <p:inputText  id="email" value="#" required="true" />
+               <p:message id="emailError" for="email" errorClass="errorCampo" />
+
+               <h:outputLabel value="Clave:"/>
+               <p:password  id="pass" value="#" required="true" feedback="true"/>
+               <p:message id="passError" for="pass" errorClass="errorCampo" />
+
+              <p:spacer height="10" />
+               
+               <!-- <h:outputLabel value=" "/> -->
+               <f:facet name="footer">
+                   <h:panelGroup >
+                       <h:commandButton  value="Ingresar"  id="Btingresar" title="Ingresar" action="#" />
+                   </h:panelGroup>
+                   
+               </f:facet>
+		</h:panelGrid>	
+		</div>
+	</composite:implementation>
+</ui:composition>

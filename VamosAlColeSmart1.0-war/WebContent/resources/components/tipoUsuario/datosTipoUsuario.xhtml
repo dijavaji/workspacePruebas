@@ -1,0 +1,35 @@
+<!--
+    Document   : componente de datos tipo usuario
+    Created on : 15-09-2014
+    Author     : thc
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	<composite:interface shortDescription="Componente para los datos del tipo de usuario">
+	</composite:interface>
+	<composite:implementation>
+
+		<div id="#{cc.clientId}">
+			<h:panelGrid columns="3" cellpadding="5" cellspacing="0">
+	               <h:outputLabel value="#{msg_wvcs['persona.nombre']}"/>
+	               <p:inputText  id="itxNomTipouser" value="#{tipoUsuarioBackBean.nombre}" required="true" />
+	               <p:message id="msgtipoUser" for="itxNomTipouser" errorClass="errorCampo" />
+	
+	              <p:spacer height="10" />
+	               
+	               <!-- <h:outputLabel value=" "/> -->
+	               <f:facet name="footer">
+	                   <h:panelGroup >
+	                       <p:commandButton  value="Agregar"  id="Btingresar" title="Ingresar tipo usuario" action="#{tipoUsuarioBackBean.guardar()}" />
+	                       <p:commandButton  value="Cancelar" id="Btcancelar"  immediate="true" title="Cancelar las Modificaciones" action="#{tipoUsuarioBackBean.cancelar()}" />
+	                   </h:panelGroup>
+	                   
+	               </f:facet>
+			</h:panelGrid>	
+		</div>
+	</composite:implementation>
+</ui:composition>

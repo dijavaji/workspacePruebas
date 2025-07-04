@@ -1,0 +1,37 @@
+<!--
+    Document   : pagina principal del menu del sistema
+    Created on : 07-09-2014
+    Author     : thc
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="masterTemplate.xhtml"
+      xmlns:te="http://java.sun.com/jsf/composite/components"> 
+
+	<ui:define name="windowTitle">
+		Vamos al cole smart
+	</ui:define>
+	<ui:define name="headerMenu">
+	 <te:menuNavigationComponent></te:menuNavigationComponent> 
+	</ui:define>
+	
+	<ui:define name="contentHeader">
+				
+	</ui:define>
+	
+	<ui:define name="content">
+	<f:view transient="true">
+		 <!-- <h:commandLink action="pages/institucion/adminInstitucion" value="institucion" /> -->
+		 <h:commandLink action="#{tipoUsuarioBackBean.loadListTipoUsuario()}" value="tipoUsuario" />
+		 <br />
+		 <h:commandLink action="pages/institucion/adminInstituto" value="Instituto" />
+		 <br />
+		<h:commandLink action="pages/usuario/adminUsuario" value="creayyUsuario" />
+		<br />
+		<h:commandLink action="pages/tipoUsuario/createTipoUsuario" value="creatipoUsuario" />
+		</f:view>
+	</ui:define>
+
+</ui:composition>

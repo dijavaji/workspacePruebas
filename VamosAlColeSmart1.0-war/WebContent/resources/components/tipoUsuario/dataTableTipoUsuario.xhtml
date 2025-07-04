@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	<composite:interface>
+		<composite:attribute name="controller" required="true" shortDescription="Controlador de la tabla tipo usuario" />
+		<composite:attribute name="varTable" required="false" shortDescription="" />
+		<composite:attribute name="varCollection" required="false" shortDescription="" />
+		<composite:attribute name="paginator" required="false" shortDescription="" />
+		<composite:attribute name="rows" default="10" required="false" shortDescription="" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+			
+		       <h:panelGrid columns="1">
+		       			<h:panelGrid columns="3" cellpadding="10">
+		        		   	<h:outputLabel for="inptBuscarIns" value="Buscar" />
+        					<p:inputText id="inptBuscarIns" value="#{cc.attrs.value}"/>
+        					<p:message for="inptBuscarIns" display="text"/>
+						</h:panelGrid>
+							       
+			            <p:dataTable id="dtbl" var="item" value="#{cc.attrs.varCollection}"
+			                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+			                 paginator="#{cc.attrs.paginator}" rows="#{cc.attrs.rows}" style="margin-bottom:20px">
+			 
+					        <f:facet name="{Exporters}">
+					            <h:commandLink>
+					                <p:graphicImage name="/demo/images/excel.png" width="24"/>
+					                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+					            </h:commandLink>
+					 
+					            <h:commandLink>
+					                <p:graphicImage name="/resources/images/pdf.png" width="24"/>
+					                <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+					            </h:commandLink>
+					        </f:facet>
+					 
+					        <p:column>
+					            <f:facet name="header">
+					                <h:outputText value="Codigo"/>
+					            </f:facet>
+					            <h:commandLink value="#{item.id}" action="#{tipoUsuarioBackBean.verDatos()}" actionListener="#{tipoUsuarioBackBean.tipoUsuarioListener()}" >
+								<f:attribute name="tipoUsuarioFila" value="#{item}" />
+								</h:commandLink>
+					        </p:column>
+					 
+					        <p:column>
+					            <f:facet name="header">
+					                <h:outputText value="Nombre" />
+					            </f:facet>
+					            <h:outputText value="#{item.nombre}" />
+					        </p:column>
+					 
+			    </p:dataTable>
+				</h:panelGrid>
+		</div>
+</composite:implementation>
+</ui:composition>

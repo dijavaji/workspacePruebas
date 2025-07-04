@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!--
+    Document   : definicion template
+    Created on : 03-09-2014
+    Author     : thc
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+    	<meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description" content="template principal para sistema vamos al cole smart"/>
+        <meta name="author" content="Technoloqie asesoramiento informatico."/>
+        <title><ui:insert name="windowTitle"/></title>
+        
+       	<link rel="stylesheet" href="./resources/css/reset.css" />
+		<link rel="stylesheet" href="./resources/css/style.css" /> 
+		<link href="./resources/images/apple-touch-icon.png" rel="shortcut icon" type="image/x-icon" />
+        <link href="./resources/images/apple-touch-icon.png" rel="icon" type="image/x-icon" />
+		<!-- <script type="text/javascript" src="./resources/js/jquery-1.4.2.min.js" ></script>
+		<script type="text/javascript" src="./resources/js/cufon-yui.js"></script>
+		<script type="text/javascript" src="./resources/js/cufon-replace.js"></script>
+		<script type="text/javascript" src="./resources/js/Myriad_Pro_300.font.js"></script>
+		<script type="text/javascript" src="./resources/js/Myriad_Pro_400.font.js"></script>
+		<script type="text/javascript" src="./resources/js/script.js"></script> -->
+    </h:head>
+<h:body>
+    <f:facet name="last">
+		<h:outputStylesheet library="default" name="style.css" />
+	</f:facet>
+	<div class="wrap">
+	   <!-- header -->
+	   <header>
+	      <div class="container">
+			<h:form id="frmHeader">
+		         <form id="search-form" >
+		         <img src="./resources/images/logo.png" onclick="inicio.xhtml" width="140" height="55" />
+		         </form>
+         		<ui:insert name="headerMenu"/>
+	        </h:form>
+	         <!--  <form action="" id="search-form">
+	            <fieldset>
+	            <div class="rowElem">
+	               <input type="text"/>
+	               <a href="#" onClick="document.getElementById('search-form').submit()">Search</a></div>
+	            </fieldset>
+	         </form> -->
+	      </div>
+	   </header>
+	   <div class="container">
+	   		<h:form id="frmContent">
+		      	<!-- content -->
+		      	<section id="content">
+			         <div class="inside">
+		            	<h2><ui:insert name="contentHeader"/></h2>
+		            	 <ui:insert name="content"/>
+			         </div>
+			    </section>
+		    </h:form>
+	   </div>
+	</div>
+      <!-- footer -->
+	<footer>
+	   <div class="container">
+	      <div class="inside">
+	         <div class="wrapper">
+	            <div class="aligncenter"> <p>Copyright &copy; 2015 Technoloqie Asesoramiento Inform&#225;tico. All rights reserved</p></div>
+	         </div>
+	      </div>
+	   </div>
+	</footer>
+<!-- <script type="text/javascript"> Cufon.now(); </script> -->
+</h:body>
+</html>

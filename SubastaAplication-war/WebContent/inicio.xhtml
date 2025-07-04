@@ -1,11 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="masterTemplate.xhtml"
+      xmlns:te="http://java.sun.com/jsf/composite/components"> 
 
-<h:head></h:head> 
-<body> 
-<h:outputLabel value="prueba" />
-</body> 
-</html>
+	<ui:define name="windowTitle">
+		Ingresar Subastas aplicacion
+	</ui:define>
+	<ui:define name="headerMenu">
+		
+	</ui:define>
+	
+	<ui:define name="contentHeader">
+		
+	</ui:define>
+	
+	<ui:define name="content">
+		<ui:include src="/pages/paneles/panelMenu.xhtml" />
+		<h:outputText value="Consulta de drones realizando trabajos en una fecha" />
+	</ui:define>
+
+</ui:composition>

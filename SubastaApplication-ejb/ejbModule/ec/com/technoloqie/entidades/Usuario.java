@@ -1,6 +1,6 @@
 package ec.com.technoloqie.entidades;
 import java.io.Serializable;
-import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,111 +8,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author thc
  */
 @Entity
-@Table(name="usu_usuario")
-@TableGenerator(name="GEN_SECUENCIA_USR", // nombre
-                table="sec_secuencia", //nombre de la tabla que guarda las secuencias
-                pkColumnName="sec_codigo_entidad",
-                pkColumnValue="SEQ_USUARIO",
-                valueColumnName="num_secuencial",
-                allocationSize=1)
-
-
-//@NamedQueries({@NamedQuery(name="retornaUsuarios",query="SELECT l FROM usu_usuario l"),
-               //@NamedQuery(name="findByCodigo",query="SELECT l FROM usu_usuario l WHERE l.id=:codUsuario")})
-
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT e FROM Usuario e"),
-    @NamedQuery(name = "Usuario.findByUsuarioId", query = "SELECT e FROM Usuario e WHERE e.id = :usuarioId")
-    //@NamedQuery(name = "Usuario.findByFirstName", query = "SELECT e FROM Usuario e WHERE e.firstName = :firstName"),
-    //@NamedQuery(name = "Usuario.findByLastName", query = "SELECT e FROM Usuario e WHERE e.lastName = :lastName"),
-    //@NamedQuery(name = "Usuario.findByEmail", query = "SELECT e FROM Usuario e WHERE e.email = :email"),
-    //@NamedQuery(name = "Usuario.findByPhoneNumber", query = "SELECT e FROM Usuario e WHERE e.phoneNumber = :phoneNumber"),
-    //@NamedQuery(name = "Usuario.findByHireDate", query = "SELECT e FROM Usuario e WHERE e.hireDate = :hireDate"),
-    //@NamedQuery(name = "Usuario.findBySalary", query = "SELECT e FROM Usuario e WHERE e.salary = :salary"),
-    //@NamedQuery(name = "Usuario.findByCommissionPct", query = "SELECT e FROM Employees e WHERE e.commissionPct = :commissionPct")
-})
-
+@Table(name="USUARIO")
 public class Usuario implements Serializable {
-    //@OneToOne(mappedBy = "estudiante")
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE,generator="GEN_SECUENCIA_USR")
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "usu_id")
+	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@Column(name="USUARIOID",nullable=false, unique=true)
     private Integer id;
     
-     @Column(name="usu_nombre",nullable=false)
+    @Column(name="NOMBRE",nullable=false)
     private String nombre; //atributo nombre
      
-     @Column(name="usu_apellido",nullable=false)
+     @Column(name="APELLIDO",nullable=false)
     private String apellido; //atributo apellido
 
      
-    @Column(name="usu_direccion",nullable=false)
+    @Column(name="DIRECCION")
     private String direccion;// atributo direccion
     
-    @Column(name="usu_email",nullable=false)
+    @Column(name="EMAIL")
     private String email;// email
     
-    @Column(name="usu_telefono",nullable=false)
+    @Column(name="TELEFONO")
     private String telefono;// telefono
     
-    @Column(name="usu_pass",nullable=false)
+    @Column(name="PASS")
     private String pass;// pass
     
-    @ManyToOne
-	@JoinColumn(name="tip_id",nullable=false)
-	private TipoUsuario tipId;
-    @OneToMany (mappedBy="usuId")
-	private Set<Libro> librocollection;
-
-    public Set<Libro> getLibrocollection() {
-        return librocollection;
-    }
-
-    public void setLibrocollection(Set<Libro> librocollection) {
-        this.librocollection = librocollection;
-    }
+    @ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name="TIPOUSUARIOID")
+    private TipoUsuario tipoUsuario;
     
-
-    public TipoUsuario getTipId() {
-        return tipId;
-    }
-
-    public void setTipId(TipoUsuario tipId) {
-        this.tipId = tipId;
-    }
-
-    
-
-    
-    
-    
-    
-    /*@ManyToOne
-    private TipoUsuario tipo_usuario;
-
-    public TipoUsuario getTipo_usuario() {
-        return tipo_usuario;
-    }
-
-    public void setTipo_usuario(TipoUsuario tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
-    }
-*/
-
     public String getPass() {
         return pass;
     }
@@ -196,4 +129,14 @@ public class Usuario implements Serializable {
     public String toString() {
         return "ec.edu.uce.entidades.Usuario[ id=" + id + " ]";
     }
+
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+  
+}
     

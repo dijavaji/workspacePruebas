@@ -1,65 +1,36 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.com.technoloqie.entidades;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 /**
  *
  * @author thc
  */
 @Entity
-@Table(name="tip_tipo_usuario")
-@TableGenerator(name="GEN_SECUENCIA_TIP", // nombre
-                table="sec_secuencia", //nombre de la tabla que guarda las secuencias
-                pkColumnName="sec_codigo_entidad",
-                pkColumnValue="SEQ_TIPO_USU",
-                valueColumnName="num_secuencial",
-                initialValue=100,allocationSize=2)
-
-
-@NamedQueries({@NamedQuery(name="TipoUsuario.findAll",query="SELECT l FROM TipoUsuario l"),
-               @NamedQuery(name="TipoUsuario.findById",query="SELECT l FROM TipoUsuario l WHERE l.id=:tipoUsuarioId"),
-               @NamedQuery(name="TipoUsuario.findByNombre",query="SELECT l FROM TipoUsuario l WHERE l.nombre=:nombre")})
-
-
+@Table(name="TIPO_USUARIO")
 public class TipoUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE,generator="GEN_SECUENCIA_TIP")
-    @Column(name = "tip_id")
+	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@Column(name="TIPOUSUARIOID",nullable=false, unique=true)
     private Integer id;
     
-    @Column(name="tip_nombre",nullable=false)
+    @Column(name="NOMBRE",nullable=false)
     private String nombre; //atributo nombre
 
-    //<editor-fold defaultstate="collapsed" desc="Relaciones">
-	@OneToMany (mappedBy="tipId",targetEntity=Usuario.class)
-	private Set<Usuario> usercollection;
-
-    public Set<Usuario> getUsuariocollection() {
-        return usercollection;
-    }
-
-    public void setUsuariocollection(Set<Usuario> usercollection) {
-        this.usercollection = usercollection;
-    }
-    
-    
-    
+    @OneToMany(mappedBy="tipoUsuario")
+    private List<Usuario> usuarioCol;
     
     public String getNombre() {
         return nombre;
@@ -101,5 +72,14 @@ public class TipoUsuario implements Serializable {
     public String toString() {
         return "ec.edu.uce.entidades.TipoUsuario[ id=" + id + " ]";
     }
+
+	public List getUsuarioCol() {
+		return usuarioCol;
+	}
+
+	public void setUsuarioCol(List usuarioCol) {
+		this.usuarioCol = usuarioCol;
+	}
+
     
 }

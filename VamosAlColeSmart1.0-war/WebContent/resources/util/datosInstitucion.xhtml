@@ -1,0 +1,35 @@
+<!--
+    Document   : componente de ingreso de datos institucion
+    Created on : 10-09-2014
+    Author     : thc
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:te="http://java.sun.com/jsf/composite/components/tipoUsuario" >
+	<composite:interface shortDescription="Componente datos de la institucion">
+	</composite:interface>
+	<composite:implementation>
+
+		<div id="#{cc.clientId}">
+		<h:panelGrid columns="1" cellpadding="5">
+		<table>
+		<tr><te:validateInputText label="#{msg_wvcs['instituto.nombre']}:" value=""></te:validateInputText></tr>
+		
+			
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.direccion']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.telefono']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.provincia']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.ciudad']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.region']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.email']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.paginaWeb']}:" value=""></te:validateInputText></tr>
+			<tr><te:validateInputText label="#{msg_wvcs['instituto.noAulas']}:" value=""></te:validateInputText></tr>
+			</table>
+		</h:panelGrid>
+		</div>
+	</composite:implementation>
+</ui:composition>

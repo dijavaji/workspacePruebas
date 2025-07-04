@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+				
+	<f:facet name="last">
+		<!-- estilo -->
+	</f:facet>     
+
+	<h:form>
+	<p:menubar>
+		<p:submenu label="Pruebas" icon="fa fa-gear">
+		    <p:menuitem value="Consulta inicial" icon="fa fa-gears" url="/consulta-inicial.xhtml" />
+		    <p:separator />
+		    <p:menuitem value="Borrador de la prueba" icon="fa fa-edit" url="/pruebas/pruebasBorrador.xhtml" />		    
+		    <p:separator />
+		    <p:menuitem value="Prueba" icon="fa fa-gears" url="/pruebas/pruebas.xhtml" />   
+		    <p:separator />
+		    <p:menuitem value="No Ajax" icon="fa fa-gears" url="/pruebas/noAjax.xhtml" />	     
+		</p:submenu>
+		<p:submenu label="Planificación" icon="fa fa-calendar">
+		    <p:menuitem value="Gestión de usuarios" icon="fa fa-video-camera" url="/pages/usuarios.xhtml" />
+		    <p:separator />
+		    <p:menuitem value="Gestión de..." icon="fa fa-square-o" url="#" />
+		</p:submenu>
+		<p:submenu label="Operación" icon="fa fa-plane">
+		</p:submenu>
+		<p:submenu label="Mantenimiento" icon="fa fa-wrench">
+		</p:submenu>
+		<p:submenu label="Estadísticas" icon="fa fa-area-chart">
+		</p:submenu>
+		<p:submenu label="Histórico" icon="fa fa-database">
+		</p:submenu>			
+	</p:menubar>        	
+	</h:form> 
+
+</ui:composition>

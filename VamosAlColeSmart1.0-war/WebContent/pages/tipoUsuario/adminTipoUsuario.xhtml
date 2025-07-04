@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="/masterTemplate.xhtml"
+      xmlns:tech="http://java.sun.com/jsf/composite/components/tipoUsuario"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<ui:define name="windowTitle">
+		Tipo Usuario
+	</ui:define>
+	<ui:define name="headerMenu">
+	<!--  <te:menuNavigationComponent></te:menuNavigationComponent> -->
+	</ui:define>
+	
+	<ui:define name="contentHeader">
+	
+		
+	</ui:define>
+	
+	<ui:define name="content">
+		<p:panel id="basic" header="Tipo usuario | Listar informacion">
+			<tech:dataTableTipoUsuario varCollection="#{tipoUsuarioBackBean.listaTipoUsuario}" ></tech:dataTableTipoUsuario>
+			<f:facet name="actions">
+				<h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default" action="#{tipoUsuarioBackBean.nuevoTipoUsuario()}"><h:outputText styleClass="ui-icon ui-icon-star" /></h:commandLink>
+			 </f:facet>
+		</p:panel>
+	</ui:define>
+
+</ui:composition>

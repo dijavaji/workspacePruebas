@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	<composite:interface>
+		<composite:attribute name="controller" required="true" shortDescription="Controlador de la tabla" />
+		<composite:attribute name="headerPanel" required="false" shortDescription="Cabecera del panel" />
+		<composite:attribute name="varTable" required="false" shortDescription="Cabecera del panel" />
+		<composite:attribute name="varCollection" required="false" shortDescription="Cabecera del panel" />
+		<composite:attribute name="paginator" required="false" shortDescription="Cabecera del panel" />
+		<composite:attribute name="rows" default="10" required="false" shortDescription="Cabecera del panel" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+			 <p:panel id="basic" header="#{cc.attrs.headerPanel}" style="margin-bottom:10px">
+		        <h:panelGrid columns="2" cellpadding="10">
+			            <p:dataTable id="dtbl" var="cc.attrs.varTable" value="#{cc.attrs.varCollection}"
+			                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+			                 paginator="#{cc.attrs.paginator}" rows="#{cc.attrs.rows}" style="margin-bottom:20px">
+			 
+					        <f:facet name="{Exporters}">
+					            <h:commandLink>
+					                <p:graphicImage name="/demo/images/excel.png" width="24"/>
+					                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+					            </h:commandLink>
+					 
+					            <h:commandLink>
+					                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+					                <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+					            </h:commandLink>
+					        </f:facet>
+					 
+					        <p:column>
+					            <f:facet name="header">
+					                <h:outputText value="Id" />
+					            </f:facet>
+					            <h:outputText value="#{cc.attrs.varTable.id}" />
+					        </p:column>
+					 
+					        <p:column>
+					            <f:facet name="header">
+					                <h:outputText value="Year"/>
+					            </f:facet>
+					            <h:outputText value="#{car.year}" />
+					        </p:column>
+					 
+					        <p:column>
+					            <f:facet name="header">
+					                <h:outputText value="Brand" />
+					            </f:facet>
+					            <h:outputText value="#{car.brand}" />
+					        </p:column>
+					 
+					        <p:column>
+					            <f:facet name="header">
+					                <h:outputText value="Color" />
+					            </f:facet>
+					            <h:outputText value="#{car.color}" />
+					        </p:column>
+			    </p:dataTable>
+
+		        </h:panelGrid>
+		        
+		    </p:panel>
+		</div>
+</composite:implementation>
+</ui:composition>

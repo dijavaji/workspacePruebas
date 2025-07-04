@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	<composite:interface>
+		<composite:attribute name="controller" required="true" shortDescription="Controlador del usuario" />
+		<composite:attribute name="delegateDatosUsuario" required="true" shortDescription="atributo del controlador del tipo usuario" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+			 <h:panelGrid columns="3" cellpadding="10">
+		        		   	<h:outputLabel for="itNombreuser" value="#{msg_wvcs['usuario.nombre']}" />
+        					<p:inputText id="itNombreuser" value="#{cc.attrs.delegateDatosUsuario.nombre}" required="true"/>
+        					<p:message for="itNombreuser" display="text"/>
+        					
+        					<h:outputLabel for="itPass" value="#{msg_wvcs['usuario.pass']}" />
+        					<p:inputText id="itPass" value="#{cc.attrs.delegateDatosUsuario.pass}" required="true" />
+        					<p:message for="itPass" display="text"/>
+				</h:panelGrid>
+		</div>
+</composite:implementation>
+</ui:composition>

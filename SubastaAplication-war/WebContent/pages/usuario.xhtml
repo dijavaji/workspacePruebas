@@ -1,0 +1,98 @@
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"                
+                template="/masterTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<f:metadata>
+		<f:viewParam name="idUsuario" value="#{usuarioController.usuario.id}"></f:viewParam>
+		<f:viewAction action="#{usuarioController.actualizaModeloUsuario()}"></f:viewAction>
+	</f:metadata>
+	
+    <ui:define name="content">
+		<!-- detalles de un trabajo -->
+		
+			<p:panelGrid id="paneltrabajo" cellpadding="5" columns="2" columnClasses="paneltrabajo1,paneltrabajo2" style="margin-bottom:10px;">
+		        <f:facet name="header">
+		            <p:panel styleClass="fondo-botonera" style="background-color: #E6F0FF !important;">
+						<div style="text-align: right;">
+							<!-- botón cancelar aprovechando las capacidades Ajax del botón Primefaces 
+							<p:commandButton value="Salir" process="@this" action="/trabajos.xhtml?faces-redirect=true" />
+							 -->
+							<!-- la alternativa más sencilla si no tenemos que hacer nada antes de la cancelación -->
+							<p:button value="Salir" outcome="/pages/usuarios.xhtml"/>
+							<!-- usar immediate cuando queramos ejecutar lógica previa a la cancelación 
+							<p:commandButton value="Salir" action="/trabajos.xhtml?faces-redirect=true" immediate="true" />
+							 -->
+							<p:commandButton id="aceptar" value="Aceptar" action="#{usuarioController.aceptar}" 
+								update="@(:input:not(.notsend)) mensajes"
+								process="@(:input:not(.notsend))"
+								oncomplete="ajustaPosicionEtiquetas();" />
+						</div>		            
+		            </p:panel>	        
+		            <p:messages id="mensajes" showDetail="false" showIcon="false"/>
+		        </f:facet>
+		        <p:outputLabel for="numeroDeRegistro" value="Nº Registro:" />
+        		<p:inputText id="numeroDeRegistro" value="#{usuarioController.usuario.id}" size="20"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.id!=null}">
+        			<!--f:validator binding="#{numeroDeRegistroUnicoValidator}"/>
+        			<f:attribute name="isPosibleEdicionClaveNatural" value="#{false}" /-->
+        		</p:inputText>
+        		
+        		
+				<p:outputLabel for="tipUsuario" value="Tipo Usuario:"/>
+		        <h:selectOneMenu id="tipUsuario" value="#{usuarioController.usuario.tipoUsuario}"> 
+		            <f:selectItem itemLabel="-- Selecciona --" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems itemValue="#{tipoitem}" var="tipoitem" value="#{usuarioController.tipoUsuarios}" itemLabel="#{tipoitem.nombre}" />
+                    <f:converter binding="#{tipoUsuarioConverter}" converterId="ec.com.technoloqie.subasta.web.converters.TipoUsuarioConverter"/>
+                    <f:attribute name="attrtipoUser" value="#{usuarioController.tipoUsuarios}"/>     
+	         	</h:selectOneMenu>  
+		        <p:outputLabel for="nombreUser" value="Nombre:" />
+        		<p:inputText id="nombreUser" value="#{usuarioController.usuario.nombre}" size="20"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.nombre!=null}">
+        		</p:inputText>
+        		
+        		<p:outputLabel for="apellidoUser" value="Apellido:" />
+        		<p:inputText id="apellidoUser" value="#{usuarioController.usuario.apellido}" size="20"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.apellido!=null}">
+        		</p:inputText>
+        		
+        		<p:outputLabel for="direccionUser" value="Direccion:" />
+        		<p:inputText id="direccionUser" value="#{usuarioController.usuario.direccion}" size="20"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.direccion!=null}">
+        		</p:inputText>
+        		
+        		<p:outputLabel for="emailUser" value="Email:" />
+        		<p:inputText id="emailUser" value="#{usuarioController.usuario.email}" size="20"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.email!=null}">
+        		</p:inputText>	
+				
+				<p:outputLabel for="telefonoUser" value="Tlf:" />
+        		<p:inputText id="telefonoUser" value="#{usuarioController.usuario.telefono}" size="20" maxlength="10"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.telefono!=null}">
+        		</p:inputText>
+        		
+        		<p:outputLabel for="passUser" value="Password:" />
+        		<p:inputText id="passUser" value="#{usuarioController.usuario.pass}" size="20"
+        			disabled="#{not component.attributes['isPosibleEdicionClaveNatural'] and usuarioController.usuario.pass!=null}">
+        		</p:inputText>
+					            	
+
+				</p:panelGrid>
+
+	<script>
+		// selección estilo padre elemento página
+		var ajustaPosicionEtiquetas = function(){
+			$( "td:has(#formulario\\:descripcion-label), td:has(#formulario\\:panelpuntosruta-label)" )
+			.css( {"vertical-align": "top", "padding-top": "10px"} );
+			}
+		$(document).ready(ajustaPosicionEtiquetas);
+
+	</script> 			
+	</ui:define>
+    
+	<!-- TODO: contenido de otras zonas... -->
+	
+
+</ui:composition>

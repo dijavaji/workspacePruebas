@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	<composite:interface>
+		<composite:attribute name="controller" required="true" shortDescription="Controlador del instituto" />
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+			 <h:panelGrid columns="3" cellpadding="10">
+		        		   	<h:outputLabel for="intNombre" value="Nombre:" />
+        					<p:inputText id="intNombre" value="nombre prueba" required="true" readonly="true" />
+        					<p:message for="intNombre" display="text"/>
+        					
+        					<h:outputLabel for="intDir" value="Direccion:" />
+        					<p:inputText id="intDir" value="#{cc.attrs.controller}" required="true" />
+        					<p:message for="intDir" display="text"/>
+        					
+        					<h:outputLabel for="intTlf" value="Telefono:" />
+        					<p:inputText id="intTlf" value="#{cc.attrs.controller}"/>
+        					<p:message for="intTlf" display="text"/>
+        					
+        					<h:outputLabel for="intProv" value="Provincia:" />
+        					<p:inputText id="intProv" value="#{cc.attrs.controller}"/>
+        					<p:message for="intProv" display="text"/>
+        					
+        					<h:outputLabel for="intCiu" value="Ciudad:" />
+        					<p:inputText id="intCiu" value="#{cc.attrs.controller}"/>
+        					<p:message for="intCiu" display="text"/>
+        					
+        					<h:outputLabel for="intReg" value="Region:" />
+        					<p:inputText id="intReg" value="#{cc.attrs.controller}"/>
+        					<p:message for="intReg" display="text"/>
+        					
+        					<h:outputLabel for="intEma" value="Email:" />
+        					<p:inputText id="intEma" value="#{cc.attrs.controller}"/>
+        					<p:message for="intEma" display="text"/>
+        					
+        					<h:outputLabel for="intPag" value="Pagina web:" />
+        					<p:inputText id="intPag" value="#{cc.attrs.controller}"/>
+        					<p:message for="intPag" display="text"/>
+        					
+        					<h:outputLabel for="intAul" value="No aulas:" />
+        					<p:inputText id="intAul" value="#{cc.attrs.controller}"/>
+        					<p:message for="intAul" display="text"/>
+				</h:panelGrid>
+		</div>
+</composite:implementation>
+</ui:composition>

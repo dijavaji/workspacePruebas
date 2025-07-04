@@ -8,6 +8,9 @@
 .log
 .class
 .classpath
+*.classpath
+*.class
+*.log
 .settings
 .org.eclipse.*
 target
@@ -18,3 +21,10 @@ jspm_packages
 node_modules
 dist
 ${env.JBOSS_HOME}
+.gitignore
+*/.class
+*/.settings
+*/.classpath
+*/*.classpath
+
+
